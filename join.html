@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Join · Thistle Network</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+  .journey { display: flex; flex-direction: column; gap: 0; }
+  .journey li { list-style: none; display: grid; grid-template-columns: 44px 1fr; gap: 16px; padding-bottom: 26px; position: relative; }
+  .journey li::before { content: ""; position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: var(--line); }
+  .journey li:last-child::before { display: none; }
+  .journey .dot { width: 44px; height: 44px; border-radius: 999px; display: grid; place-items: center; font: 600 .9rem var(--f-mono); background: var(--purple-soft); color: var(--purple-text); }
+  .journey li.here .dot { background: var(--leaf); color: #0f1a09; }
+  .journey h3 { font-size: var(--s1); margin: 8px 0 4px; letter-spacing: -0.02em; }
+  .journey p { color: var(--muted); }
+  ol.journey { padding: 0; margin: 0; }
+</style>
+</head>
+<body data-page="join">
+<main>
+  <section class="hero compact">
+    <div class="wrap">
+      <div class="stack rise">
+        <span class="eyebrow">Register to join</span>
+        <h1>Find your way in<span class="green">.</span></h1>
+        <p class="lede">Three quick questions, then we'll send you to the right sign-up form. It takes under a minute.</p>
+        <p class="proof"><b data-stat="members">148</b> apprentices from <b data-stat="employers">65</b> employers are already in.</p>
+      </div>
+      <img class="hero-emblem logo-l" src="assets/emblem-light.png" alt=""><img class="hero-emblem logo-d" src="assets/emblem-dark.png" alt="">
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap split">
+      <div class="quiz" id="quiz" aria-live="polite"></div>
+      <div class="stack">
+        <span class="eyebrow">What happens next</span>
+        <ol class="journey">
+          <li class="here"><span class="dot">01</span><div><h3>Register</h3><p>A short form covering your role, location, and employer or training provider.</p></div></li>
+          <li><span class="dot">02</span><div><h3>Get approved</h3><p>Each registration is checked to keep the groups safe, relevant and apprentice-only.</p></div></li>
+          <li><span class="dot">03</span><div><h3>Join WhatsApp</h3><p>Approved members get an invite matched to their sector and area. You can't join directly.</p></div></li>
+        </ol>
+        <p style="color:var(--muted)">Joining is free. Questions first? <a href="about.html#faq">Read the FAQ</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="stats.js"></script>
+<script src="site.js"></script>
+<script>
+  const Q = [
+    { key: "stage", q: "Where are you right now?", options: [
+      ["school", "At school or college"], ["looking", "Looking for an apprenticeship"], ["current", "Doing an apprenticeship now"], ["finished", "Finished my apprenticeship"] ] },
+    { key: "area", q: "Where in Scotland are you based?", options: [
+      ["Glasgow & the West", "Glasgow & the West"], ["Edinburgh & the Lothians", "Edinburgh & the Lothians"], ["Aberdeen & the North East", "Aberdeen & the North East"], ["Tayside & Fife", "Tayside & Fife"], ["the Highlands & Islands", "Highlands & Islands"], ["Central, the South & the Borders", "Central, the South & the Borders"] ] },
+    { key: "sector", q: "Which sector are you in, or interested in?", options: [
+      ["engineering", "Engineering & energy"], ["digital", "Digital & tech"], ["construction", "Construction & built environment"], ["finance", "Finance & business"], ["health", "Health & care"], ["other", "Something else or not sure yet"] ] }
+  ];
+  const quiz = document.getElementById("quiz");
+  let step = 0, answers = TN.store.get("quiz", {});
+  const progress = () => `<div class="quiz-progress">${Q.map((_, i) => `<i class="${i <= step ? "on" : ""}"></i>`).join("")}</div>`;
+  const ask = () => {
+    const item = Q[step];
+    quiz.innerHTML = `${progress()}<span class="eyebrow">Question ${step + 1} of ${Q.length}</span><h3 style="margin-top:10px">${item.q}</h3>
+      <div class="options">${item.options.map(([v, l]) => `<button class="option" type="button" data-v="${v}">${l}</button>`).join("")}</div>
+      ${step ? '<button class="quiz-back" type="button" id="back">Back</button>' : ""}`;
+    quiz.querySelector(".option").focus({ preventScroll: true });
+  };
+  const result = () => {
+    TN.store.set("quiz", answers);
+    const a = answers, sectorLabel = Q[2].options.find((o) => o[0] === a.sector)?.[1].toLowerCase();
+    let html;
+    if (a.stage === "current") {
+      html = `<span class="pill pill-current">Current apprentice</span><h3>You're on the current path.</h3>
+        <p class="lede">Register and we'll match you with ${a.sector === "other" ? "a group" : `the ${sectorLabel} group`} and apprentices around ${a.area}.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="${TN.FORMS.current}">Open the current apprentice form</a><a class="btn btn-ghost" href="current.html">See what's included</a></div>`;
+    } else if (a.stage === "finished") {
+      html = `<span class="pill pill-plain">Finished</span><h3>Congratulations. Want to give back?</h3>
+        <p class="lede">We don't run an alumni group yet, but we'd love you as a mentor for aspiring apprentices in ${a.area}.</p>
+        <div class="copy-row"><code>${TN.EMAIL}</code><button class="btn btn-ghost" type="button" id="copy-mail">Copy email</button></div>`;
+    } else {
+      html = `<span class="pill pill-aspiring">Aspiring apprentice</span><h3>You're on the aspiring path.</h3>
+        <p class="lede">Register and we'll let you know about insight days${a.sector === "other" ? "" : ` in ${sectorLabel}`}, mentoring and workshops near ${a.area}.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="${TN.FORMS.aspiring}">Open the aspiring apprentice form</a><a class="btn btn-ghost" href="aspiring.html">See what's included</a></div>`;
+    }
+    quiz.innerHTML = `<div class="quiz-progress">${Q.map(() => '<i class="on"></i>').join("")}</div><div class="quiz-result">${html}</div><button class="quiz-back" type="button" id="restart">Start again</button>`;
+  };
+  quiz.addEventListener("click", (e) => {
+    const opt = e.target.closest(".option");
+    if (opt) { answers[Q[step].key] = opt.dataset.v; step++; step < Q.length ? ask() : result(); return; }
+    if (e.target.id === "back") { step--; ask(); }
+    if (e.target.id === "restart") { step = 0; answers = {}; TN.store.set("quiz", null); ask(); }
+    if (e.target.id === "copy-mail") { try { navigator.clipboard.writeText(TN.EMAIL).then(() => TN.toast("Copied " + TN.EMAIL), () => TN.toast(TN.EMAIL)); } catch (err) { TN.toast(TN.EMAIL); } }
+  });
+  if (answers && answers.stage && answers.area && answers.sector) { step = Q.length; result(); } else { answers = {}; ask(); }
+</script>
+</body>
+</html>

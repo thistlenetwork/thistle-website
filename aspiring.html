@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aspiring Apprentices · Thistle Network</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .tab-panel { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: clamp(24px, 4vw, 40px); display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .tab-panel h3 { font-size: var(--s3); }
+  .tab-panel dl { margin: 0; display: grid; gap: 14px; }
+  .tab-panel dt { font: 500 var(--s-1)/1 var(--f-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--green); }
+  .tab-panel dd { margin: 4px 0 0; }
+  @media (max-width: 760px) { .tab-panel { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-page="aspiring">
+<main>
+  <section class="hero compact">
+    <div class="wrap">
+      <div class="stack rise">
+        <span class="eyebrow">Aspiring apprentices</span>
+        <h1>Get application-ready<span class="green">.</span></h1>
+        <p class="lede">Thinking about an apprenticeship? Meet the people already doing one, see inside Scottish employers, and walk into your interview prepared.</p>
+        <p class="proof">Learn from <b data-stat="members">151</b> apprentices at <b data-stat="employers">65</b> employers.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="https://thistleaspire.zite.so">Join as an aspiring apprentice</a></div>
+      </div>
+      <img class="hero-emblem logo-l" src="assets/emblem-light.png" alt=""><img class="hero-emblem logo-d" src="assets/emblem-dark.png" alt="">
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">What you get</span>
+        <h2>Advice from people one step ahead of you.</h2>
+      </div>
+      <div class="grid grid-2">
+        <div class="card"><h3>Insight days</h3><p>Go inside Scottish employers, see what the work looks like day to day, and ask the questions you can't ask at interview.</p></div>
+        <div class="card"><h3>Mentoring and mock interviews</h3><p>Current apprentices read your application, run practice interviews and tell you what they wish they'd known.</p></div>
+        <div class="card"><h3>Pathways and providers</h3><p>Foundation, Modern or Graduate? College or university route? We explain the options in plain language.</p></div>
+        <div class="card"><h3>Workshops all year</h3><p>A programme of in-person sessions, online workshops and masterclasses, spread through the year so there's always one coming up.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Know your options</span>
+        <h2>Scotland's three apprenticeship routes</h2>
+        <p class="lede">Pick one to see how it works.</p>
+      </div>
+      <div class="tabs" role="tablist" id="route-tabs"></div>
+      <div class="tab-panel" id="route-panel" role="tabpanel" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap split">
+      <div class="stack">
+        <span class="eyebrow">Readiness checklist</span>
+        <h2 style="font-size:var(--s4)">How ready are you?</h2>
+        <p class="lede">Tick off what you've done. Your progress stays saved in this browser, so come back to it as you go.</p>
+        <p style="color:var(--muted)">Stuck on one? That's what our mentors are for.</p>
+      </div>
+      <div>
+        <div class="meter"><span id="ready-label">0 of 8 done</span><div class="bar"><i id="ready-bar" style="width:0%"></i></div></div>
+        <div class="checklist" id="checklist"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="next-event" data-next-event="aspiring"><div class="stack"><span class="eyebrow">Next event</span><h3>Loading the calendar…</h3></div></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="cta">
+        <div><h2>Start with a short form.</h2><p>Tell us where you are and what you're interested in. We'll match you with sessions and a mentor.</p></div>
+        <a class="btn btn-primary" href="https://thistleaspire.zite.so">Register as aspiring</a>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="stats.js"></script>
+<script src="site.js"></script>
+<script>
+  const routes = [
+    { id: "foundation", name: "Foundation", who: "Pupils in S5 and S6", how: "Taken alongside your school subjects, with time spent at college and with an employer.", level: "SCQF level 6, around Higher level", good: "Trying a sector before you leave school." },
+    { id: "modern", name: "Modern", who: "Anyone aged 16 or over", how: "A paid job with training. You learn on the job and with a college or training provider.", level: "From SCQF level 5 upwards, depending on the role", good: "Earning a wage while you get qualified." },
+    { id: "graduate", name: "Graduate", who: "School leavers and people already in work", how: "Study for a degree with a university while you work for an employer.", level: "Degree level, SCQF 8 to 11", good: "A degree with no tuition fees and years of experience by the end." }
+  ];
+  const tabs = document.getElementById("route-tabs"), panel = document.getElementById("route-panel");
+  const showRoute = (id) => {
+    const r = routes.find((x) => x.id === id);
+    tabs.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.id === id));
+    panel.innerHTML = `<div class="stack"><span class="pill pill-aspiring">${r.name} apprenticeship</span><h3>${r.good}</h3></div>
+      <dl><div><dt>Who it's for</dt><dd>${r.who}</dd></div><div><dt>How it works</dt><dd>${r.how}</dd></div><div><dt>Level</dt><dd>${r.level}</dd></div></dl>`;
+    TN.store.set("route", id);
+  };
+  tabs.innerHTML = routes.map((r) => `<button class="chip" type="button" data-id="${r.id}">${r.name}</button>`).join("");
+  tabs.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) showRoute(b.dataset.id); });
+  showRoute(TN.store.get("route", "modern"));
+
+  const items = [
+    ["Pick two or three sectors you'd like to work in", "Engineering, digital, finance, construction…"],
+    ["Write a CV that fits on one page", "Include part-time jobs, clubs and volunteering"],
+    ["Find five employers that hire apprentices", "Check apprenticeships.scot and company careers pages"],
+    ["Note the application deadlines", "Many big employers open in autumn and close by spring"],
+    ["Draft answers to 'why this apprenticeship?'", "Be specific about the company and the role"],
+    ["Do a practice interview", "Ask a Thistle mentor to run one with you"],
+    ["Prepare two questions to ask the interviewer", "About the training, the team or the day to day"],
+    ["Go to an insight day or open evening", "See the workplace before you commit"]
+  ];
+  const done = new Set(TN.store.get("checklist", []));
+  const list = document.getElementById("checklist");
+  const paint = () => {
+    const n = items.filter((_, i) => done.has(i)).length;
+    document.getElementById("ready-label").textContent = `${n} of ${items.length} done`;
+    document.getElementById("ready-bar").style.width = (n / items.length * 100) + "%";
+  };
+  list.innerHTML = items.map(([t, s], i) => `<label class="check"><input type="checkbox" id="chk-${i}" data-i="${i}" ${done.has(i) ? "checked" : ""}><span><b>${t}</b><small>${s}</small></span></label>`).join("");
+  list.addEventListener("change", (e) => {
+    const i = +e.target.dataset.i; e.target.checked ? done.add(i) : done.delete(i);
+    TN.store.set("checklist", [...done]); paint();
+    if (done.size === items.length) TN.toast("All done. You're application-ready.");
+  });
+  paint();
+</script>
+</body>
+</html>

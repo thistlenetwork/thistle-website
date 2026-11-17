@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Events · Thistle Network</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 4px; background: var(--surface); }
+  .seg button { border: 0; background: transparent; color: var(--muted); padding: 8px 16px; border-radius: 999px; font: 600 .92rem var(--f-body); cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  .stats.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 760px) { .stats.three { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-page="events">
+<main>
+  <section class="hero compact">
+    <div class="wrap">
+      <div class="stack rise">
+        <span class="eyebrow">Events</span>
+        <h1>Turn up on your own. Leave knowing people<span class="green">.</span></h1>
+        <p class="lede">Food nights, games, hikes and days out across Scotland. Most events are free, and some have a small ticket fee.</p>
+        <p class="proof"><b data-ev="came">193</b> apprentices through the door at <b data-ev="count">10</b> events since <span data-ev="since">May 2026</span>.</p>
+      </div>
+      <img class="hero-emblem logo-l" src="assets/emblem-light.png" alt=""><img class="hero-emblem logo-d" src="assets/emblem-dark.png" alt="">
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="next-event" data-next-event="all"><div class="stack"><span class="eyebrow">Next event</span><h3>Loading the calendar…</h3></div></div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0;border-top:0">
+    <div class="wrap">
+      <div class="toolbar">
+        <div class="seg" role="group" aria-label="When">
+          <button type="button" data-when="upcoming" aria-pressed="true">Coming up</button>
+          <button type="button" data-when="past" aria-pressed="false">Past</button>
+        </div>
+        <span class="spacer"></span>
+        <div class="toolbar" style="margin:0" role="group" aria-label="Where" id="places"></div>
+      </div>
+      <div class="event-list" id="list"><div class="empty">Loading events…</div></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">So far</span><h2>How our events have gone</h2></div>
+      <div class="stats three" id="stats"></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="cta">
+        <div><h2>Want to run one with us?</h2><p>Employers can host insight days, sponsor a social or take a stall. Apprentices can pitch an idea for the next trip.</p></div>
+        <a class="btn btn-primary" href="about.html#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="stats.js"></script>
+<script src="site.js"></script>
+<script>
+  const state = { when: TN.store.get("ev-when", null), place: TN.store.get("ev-place", "all") };
+  let all = [];
+  const render = () => {
+    document.querySelectorAll("[data-when]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.when === state.when));
+    document.querySelectorAll("[data-place]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.place === state.place));
+    const rows = all
+      .filter((e) => (state.when === "past") === TN.isPast(e))
+      .filter((e) => state.place === "all" || e.place === state.place)
+      .sort((a, b) => {
+        const da = a.date ? TN.parseDate(a.date) : Infinity, db = b.date ? TN.parseDate(b.date) : Infinity;
+        return state.when === "past" ? db - da : da - db;
+      });
+    document.getElementById("list").innerHTML = rows.length ? rows.map(TN.eventRow).join("")
+      : `<div class="empty">Nothing here yet. ${state.when === "upcoming" ? "New dates are added often, so check back soon." : "Past events will show here."}</div>`;
+  };
+  document.addEventListener("click", (e) => {
+    const w = e.target.closest("[data-when]"), p = e.target.closest("[data-place]");
+    if (w) { state.when = w.dataset.when; TN.store.set("ev-when", state.when); render(); }
+    if (p) { state.place = p.dataset.place; TN.store.set("ev-place", state.place); render(); }
+  });
+  TN.loadEvents().then((events) => {
+    all = events;
+    const places = [...new Set(events.map((e) => e.place))].sort((a, b) => events.filter((e) => e.place === b).length - events.filter((e) => e.place === a).length);
+    document.getElementById("places").innerHTML = [["all", "Everywhere"], ...places.map((p) => [p, p])]
+      .map(([v, l]) => `<button class="chip" type="button" data-place="${v}" aria-pressed="false">${l}</button>`).join("");
+    if (state.place !== "all" && !places.includes(state.place)) state.place = "all";
+    if (!state.when) state.when = events.some((e) => !TN.isPast(e)) ? "upcoming" : "past";
+    render();
+
+    const t = TN.eventTotals(events);
+    const first = t.past.slice().sort((a, b) => TN.parseDate(a.date) - TN.parseDate(b.date))[0];
+    const fill = { came: t.came, count: t.past.length, since: first ? TN.parseDate(first.date).toLocaleDateString("en-GB", { month: "long", year: "numeric" }) : "" };
+    document.querySelectorAll("[data-ev]").forEach((el) => { el.textContent = fill[el.dataset.ev]; });
+    document.getElementById("stats").innerHTML = `
+      <div class="stat"><b>${t.past.length}</b><span>events run since ${fill.since}</span></div>
+      <div class="stat"><b>${t.came}</b><span>apprentices through the door</span></div>
+      <div class="stat"><b>${t.biggest ? t.biggest.attended : 0}</b><span>at our biggest night${t.biggest ? `, ${t.biggest.title}` : ""}</span></div>`;
+  }).catch(() => { document.getElementById("list").innerHTML = `<div class="empty">Events didn't load. Refresh the page to try again.</div>`; });
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Current Apprentices · Thistle Network</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+  .calc { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: clamp(24px, 4vw, 36px); display: flex; flex-direction: column; gap: 18px; }
+  .calc label { font-weight: 600; display: flex; flex-direction: column; gap: 8px; }
+  .calc input[type="number"] { font: 600 1.4rem var(--f-mono); padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); width: 100%; }
+  .calc input[type="range"] { width: 100%; accent-color: var(--leaf); }
+  .calc .toggle { flex-direction: row; align-items: center; gap: 10px; font-weight: 500; }
+  .calc .toggle input { width: 18px; height: 18px; accent-color: var(--leaf); }
+  .take-home { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .take-home b { font: 800 var(--s4)/1 var(--f-display); color: var(--green); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+  .breakdown { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .breakdown td { padding: 9px 0; border-bottom: 1px solid var(--line); }
+  .breakdown td:last-child { text-align: right; font-family: var(--f-mono); }
+  .stackbar { display: flex; height: 14px; border-radius: 999px; overflow: hidden; background: var(--line); }
+  .stackbar i { display: block; height: 100%; transition: width .3s; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: .85rem; color: var(--muted); }
+  .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; background: var(--c); }
+  .note { font-size: .85rem; color: var(--muted); }
+</style>
+</head>
+<body data-page="current">
+<main>
+  <section class="hero compact">
+    <div class="wrap">
+      <div class="stack rise">
+        <span class="eyebrow">Current apprentices</span>
+        <h1>Find your people<span class="green">.</span></h1>
+        <p class="lede">You might be the only apprentice in your team. You shouldn't be the only one you know. Meet apprentices in your sector and your area, then get out and do something.</p>
+        <p class="proof"><b data-stat="members">148</b> apprentices in <b data-stat="places">17</b> towns and cities are already here.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="https://thistlenetwork.zite.so">Join as a current apprentice</a></div>
+      </div>
+      <img class="hero-emblem logo-l" src="assets/emblem-light.png" alt=""><img class="hero-emblem logo-d" src="assets/emblem-dark.png" alt="">
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">What's inside</span><h2>Groups, trips and grown-up money stuff.</h2></div>
+      <div class="grid grid-3">
+        <div class="card"><h3>Industry and regional groups</h3><p>WhatsApp groups matched to your sector and where you live, so the advice fits your job and the meet-ups are close by.</p></div>
+        <div class="card"><h3>Socials, trips and meet-ups</h3><p>Food, games and grub nights, plus bigger days out. Turn up on your own and leave knowing people.</p></div>
+        <div class="card"><h3>Financial literacy</h3><p>Sessions for early earners on payslips, tax, pensions and saving, from people who started where you are.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Plan the next one</span>
+        <h2>What would get you out the door?</h2>
+        <p class="lede">These are the adventures on our list. Pick your favourites, copy them, and drop them in your group chat when we run the next poll.</p>
+      </div>
+      <div class="tiles" id="tiles"></div>
+      <div class="toolbar" style="margin-top:20px;margin-bottom:0">
+        <span id="pick-count" style="color:var(--muted)">No picks yet</span><span class="spacer"></span>
+        <button class="btn btn-ghost" type="button" id="copy-picks">Copy my picks</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap split">
+      <div class="stack">
+        <span class="eyebrow">First payslip</span>
+        <h2 style="font-size:var(--s4)">What will actually land in your account?</h2>
+        <p class="lede">Your salary isn't your take-home. Put in your yearly pay to see roughly what's left after Scottish income tax, National Insurance and a workplace pension.</p>
+        <p class="note">An estimate using 2025/26 Scottish rates and a standard tax code (1257L). Your payslip may differ. We cover this properly in our financial literacy sessions.</p>
+      </div>
+      <div class="calc">
+        <label for="salary">Yearly salary (£)
+          <input type="number" id="salary" min="0" max="150000" step="500" value="20000" inputmode="numeric">
+        </label>
+        <input type="range" id="salary-range" min="8000" max="60000" step="500" value="20000" aria-label="Yearly salary slider">
+        <label class="toggle" for="pension"><input type="checkbox" id="pension" checked> Workplace pension at 5%</label>
+        <div class="take-home"><b id="monthly">£0</b><span style="color:var(--muted)">a month take-home</span></div>
+        <div class="stackbar" id="stackbar" aria-hidden="true"></div>
+        <div class="legend"><span style="--c:var(--leaf)">Take-home</span><span style="--c:var(--lavender)">Income tax</span><span style="--c:#d8a33a">NI</span><span style="--c:#6fa0c8">Pension</span></div>
+        <table class="breakdown" id="breakdown"></table>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="next-event" data-next-event="current"><div class="stack"><span class="eyebrow">Next event</span><h3>Loading the calendar…</h3></div></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="cta">
+        <div><h2>Get matched to your group.</h2><p>Register, get approved, and we'll send your WhatsApp invite for your sector and area.</p></div>
+        <a class="btn btn-primary" href="https://thistlenetwork.zite.so">Register as current</a>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="stats.js"></script>
+<script src="site.js"></script>
+<script>
+  // adventures
+  const adventures = [
+    ["Food, games & grub", "A relaxed night to meet your group"],
+    ["Go-karting", "Already in planning"],
+    ["Hiking", "A day in the hills, all levels"],
+    ["A lodge up north", "A weekend away in the Highlands"],
+    ["Top Golf", "No golf skills needed"],
+    ["Cinema night", "Film, then food after"],
+    ["Laser tag", "Sector vs sector"]
+  ];
+  const picks = new Set(TN.store.get("picks", []));
+  const tiles = document.getElementById("tiles");
+  const paintPicks = () => {
+    tiles.querySelectorAll(".tile").forEach((t) => { const on = picks.has(t.dataset.name); t.setAttribute("aria-pressed", on); t.querySelector(".heart").textContent = on ? "✓ I'm in" : "+ Add to my picks"; });
+    document.getElementById("pick-count").textContent = picks.size ? `${picks.size} pick${picks.size > 1 ? "s" : ""}: ${[...picks].join(", ")}` : "No picks yet";
+  };
+  tiles.innerHTML = adventures.map(([n, s]) => `<button class="tile" type="button" data-name="${n}"><b>${n}</b><small>${s}</small><span class="heart"></span></button>`).join("");
+  tiles.addEventListener("click", (e) => { const t = e.target.closest(".tile"); if (!t) return; const n = t.dataset.name; picks.has(n) ? picks.delete(n) : picks.add(n); TN.store.set("picks", [...picks]); paintPicks(); });
+  document.getElementById("copy-picks").addEventListener("click", () => {
+    if (!picks.size) { TN.toast("Pick at least one first"); return; }
+    const text = "My Thistle picks: " + [...picks].join(", ");
+    try { navigator.clipboard.writeText(text).then(() => TN.toast("Copied. Paste it in your group chat"), () => TN.toast(text)); } catch (e) { TN.toast(text); }
+  });
+  paintPicks();
+
+  // take-home calculator (2025/26 Scottish bands, annual)
+  // band widths on taxable income above the personal allowance: starter, basic, intermediate, higher, advanced, top
+  const bands = [[2827, .19], [12094, .20], [16171, .21], [31338, .42], [50140, .45], [Infinity, .48]];
+  const incomeTax = (gross) => {
+    const pa = gross > 100000 ? Math.max(0, 12570 - (gross - 100000) / 2) : 12570;
+    let left = Math.max(0, gross - pa), tax = 0;
+    for (const [width, rate] of bands) { const slice = Math.min(left, width); tax += slice * rate; left -= slice; if (left <= 0) break; }
+    return tax;
+  };
+  const ni = (g) => Math.max(0, Math.min(g, 50270) - 12570) * .08 + Math.max(0, g - 50270) * .02;
+  const pension = (g) => Math.max(0, Math.min(g, 50270) - 6240) * .05;
+  const gbp = (n) => "£" + Math.round(n).toLocaleString("en-GB");
+  const $s = document.getElementById("salary"), $r = document.getElementById("salary-range"), $p = document.getElementById("pension");
+  const calc = () => {
+    const g = Math.max(0, +$s.value || 0);
+    const pen = $p.checked ? pension(g) : 0;
+    const tax = incomeTax(g - pen), n = ni(g), net = g - tax - n - pen;
+    document.getElementById("monthly").textContent = gbp(net / 12);
+    const seg = [[net, "var(--leaf)"], [tax, "var(--lavender)"], [n, "#d8a33a"], [pen, "#6fa0c8"]];
+    document.getElementById("stackbar").innerHTML = g ? seg.map(([v, c]) => `<i style="width:${v / g * 100}%;background:${c}"></i>`).join("") : "";
+    document.getElementById("breakdown").innerHTML = [["Salary", g], ["Income tax", -tax], ["National Insurance", -n], ["Pension", -pen], ["Take-home per year", net], ["Take-home per month", net / 12]]
+      .map(([k, v], i) => `<tr${i >= 4 ? ' style="font-weight:600"' : ""}><td>${k}</td><td>${v < 0 ? "−" : ""}${gbp(Math.abs(v))}</td></tr>`).join("");
+    TN.store.set("salary", g);
+  };
+  $s.value = $r.value = TN.store.get("salary", 20000);
+  $s.addEventListener("input", () => { $r.value = $s.value; calc(); });
+  $r.addEventListener("input", () => { $s.value = $r.value; calc(); });
+  $p.addEventListener("change", calc);
+  calc();
+</script>
+</body>
+</html>

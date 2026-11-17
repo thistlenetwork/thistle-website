@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thistle Network</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="An apprentice-led community connecting current and aspiring apprentices across Scotland.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body data-page="home">
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="stack rise">
+        <span class="eyebrow">Scotland · Apprentice-led community</span>
+        <h1>Connecting apprentices across <span class="swap" id="place">Scotland</span><span class="green">.</span></h1>
+        <p class="lede">Advice, friendship and the social side of work. Built by Scottish apprentices for Scottish apprentices, so an apprenticeship feels connected, not isolated.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="join.html">Register to join
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-ghost" href="events.html">See events</a>
+        </div>
+        <p class="proof"><b data-stat="members">148</b> apprentices from <b data-stat="employers">65</b> employers have already joined.</p>
+        <p style="color:var(--hero-muted);font-size:.9rem">Free to join. WhatsApp access is given after registration.</p>
+      </div>
+      <img class="hero-emblem logo-l" src="assets/emblem-light.png" alt=""><img class="hero-emblem logo-d" src="assets/emblem-dark.png" alt="">
+    </div>
+  </section>
+
+  <div class="ticker employers" aria-hidden="true"><div class="ticker-track" data-employers></div></div>
+
+  <section class="numbers" aria-labelledby="numbers-title">
+    <div class="wrap">
+      <div class="numbers-top">
+        <div>
+          <span class="eyebrow" id="numbers-title">The network today</span>
+          <div class="mega"><span data-stat="members">148</span><span class="plus">+</span></div>
+          <p class="mega-label">apprentices have joined since <em data-stat="since">April 2026</em>. We started with <span data-stat="firstMonth">3</span>.</p>
+          <p style="color:var(--n-muted);margin-top:14px">Plus <b style="color:var(--n-ink)" data-stat="aspiring">19</b> aspiring apprentices getting application-ready.</p>
+        </div>
+        <figure class="growth">
+          <div class="growth-head"><b>Total members, month by month</b><span class="chip-up">+<span data-stat="last30">24</span> in the last 30 days</span></div>
+          <div data-growth></div>
+          <figcaption>Live from our sign-up forms. Latest sign-up: <span data-stat="updated">22 October 2026</span>.</figcaption>
+        </figure>
+      </div>
+      <div class="figs">
+        <div class="fig"><b data-stat="employers">65</b><span>employers, from banks and broadcasters to distilleries</span></div>
+        <div class="fig"><b data-stat="places">17</b><span>towns and cities, from Ayr to Elgin</span></div>
+        <div class="fig"><b data-stat="providers">22</b><span>universities, colleges and training providers</span></div>
+        <div class="fig"><b><span data-stat="friendShare">53</span>%</b><span>joined because a friend or colleague told them</span></div>
+      </div>
+      <div><a class="btn btn-ghost" href="about.html#numbers">See who's in the network</a></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Two paths, one network</span>
+        <h2>Where are you on the road?</h2>
+        <p class="lede">Whether you're applying or already earning, there's a place for you here.</p>
+      </div>
+      <div class="grid grid-2">
+        <a class="path path-aspire" href="aspiring.html">
+          <span class="pill pill-aspiring">Aspiring apprentices</span>
+          <h3>Get application-ready</h3>
+          <ul>
+            <li>Insight days with Scottish employers</li>
+            <li>Mentoring and mock interviews from current apprentices</li>
+            <li>Clear guidance on pathways and providers</li>
+          </ul>
+          <span class="go">Explore the aspiring path →</span>
+        </a>
+        <a class="path path-current" href="current.html">
+          <span class="pill pill-current">Current apprentices</span>
+          <h3>Find your people</h3>
+          <ul>
+            <li>Industry and regional WhatsApp groups</li>
+            <li>Socials, trips and meet-ups</li>
+            <li>Financial literacy sessions for early earners</li>
+          </ul>
+          <span class="go">Explore the current path →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="next-event" data-next-event="all">
+        <div class="stack"><span class="eyebrow">Next event</span><h3>Loading the calendar…</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Getting involved</span>
+        <h2>Three steps in. No cold group chats.</h2>
+        <p class="lede">You can't join the WhatsApp groups directly. Every member is checked first, which keeps the groups safe, relevant and apprentice-only.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card"><span class="step-num">STEP 01</span><h3>Register</h3><p>A short form: your role, where you're based, and your employer or training provider.</p></div>
+        <div class="card"><span class="step-num">STEP 02</span><h3>Get approved</h3><p>A volunteer checks each registration so the groups stay safe and apprentice-only.</p></div>
+        <div class="card"><span class="step-num">STEP 03</span><h3>Join WhatsApp</h3><p>You get an invite matched to your sector and area, so the first people you meet do what you do.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <h2>Your first apprentice friends are one form away.</h2>
+          <p>Answer three quick questions and we'll point you to the right sign-up.</p>
+        </div>
+        <a class="btn btn-primary" href="join.html">Find my path</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="stats.js"></script>
+<script src="site.js"></script>
+<script>
+  // towns our members are based in
+  const places = ["Scotland", "Glasgow", "Edinburgh", "Greenock", "Aberdeen", "Stirling", "Falkirk", "Perth", "Ayr", "Elgin", "Dunfermline", "Arbroath"];
+  const placeEl = document.getElementById("place");
+  let pi = 0;
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    setInterval(() => { pi = (pi + 1) % places.length; placeEl.textContent = places[pi]; placeEl.classList.remove("in"); void placeEl.offsetWidth; placeEl.classList.add("in"); }, 2200);
+  }
+</script>
+</body>
+</html>

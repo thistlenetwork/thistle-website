@@ -1,7 +1,7 @@
-# Builds the site and publishes it to GitHub Pages.
-# Runs on every push to main, every hour (to refresh the live member numbers from Zite
-# and move finished events into "past"), and on demand from the Actions tab.
-name: Build and deploy
+# Publishes the site to GitHub Pages. There is no build step: the pages are plain HTML.
+# Before each publish, update-stats.mjs refreshes the member numbers in stats.js from Zite.
+# Runs on every push to main, every hour (to keep the numbers live), and on demand from the Actions tab.
+name: Deploy
 
 on:
   push:
@@ -20,34 +20,23 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - id: pages
-        uses: actions/configure-pages@v5
-      - name: Build
-        run: npm run build
-        env:
-          # Optional. Without it the site uses src/content/stats-snapshot.json.
-          ZITE_API_KEY: ${{ secrets.ZITE_API_KEY }}
-          # Empty when the site has its own domain, "/<repo name>" when it doesn't.
-          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: out
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Refresh member numbers
+        run: node .github/scripts/update-stats.mjs
+        env:
+          ZITE_API_KEY: ${{ secrets.ZITE_API_KEY }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
       - id: deployment
         uses: actions/deploy-pages@v5

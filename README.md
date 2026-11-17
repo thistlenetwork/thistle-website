@@ -1,69 +1,36 @@
 # Thistle Network website
 
-The site for [thistle.network](https://thistle.network): one Next.js app, exported as plain files and hosted free on GitHub Pages. There is no server, database or CMS to run.
+The site for [thistle.network](https://thistle.network): plain HTML, CSS and JavaScript, hosted free on GitHub Pages. There is nothing to build or install.
 
 ## Editing the site
 
-Everything you're likely to change is in `src/content/`:
-
 | File | What it holds |
 | --- | --- |
-| `events.ts` | Every event. Add new ones at the top. Leave `date` out until it's fixed; add `attended` afterwards. |
-| `news.ts` | News posts. Copy a block to add one. |
-| `home.ts` | Homepage copy, the join options and the FAQ. |
-| `site.ts` | Email, sign-up form links, social links, menus. |
-| `stats-snapshot.json` | Backup member numbers, used only if Zite can't be reached. |
+| `events.json` | Every event. Leave `date` as `null` until it's fixed, and add `attended` (how many came) afterwards. |
+| `index.html`, `aspiring.html`, `current.html`, `events.html`, `about.html`, `join.html` | The words on each page. |
+| `site.js` | The menu and footer shared by every page, and the code that fills in the numbers and events. |
+| `site.css` | All the styles, with the light and dark colours at the top. |
+| `assets/` | The logos. |
+| `privacy.html` | The privacy policy (from the previous site, with its own `privacy.css`, `privacy.js` and images). |
 
-Copy on the other pages (Aspiring, Current, About, Join, Privacy) is in `src/app/<page>/page.tsx`.
-
-Edit a file on GitHub, commit to `main`, and the site rebuilds and goes live in about two minutes.
-
-## Photos
-
-Drop images into these folders. No code changes are needed. Keep each file under about 400 KB (export JPGs at around 1600px wide).
-
-- `public/photos/hero/`: up to 8 photos for the homepage scrapbook. File names become the polaroid captions (`glasgow-2026.jpg` becomes "GLASGOW 2026").
-- `public/photos/events/<event id>/`: photos for one event, e.g. `public/photos/events/flip-out/`. The event then appears in the Gallery automatically, with a "Photos" link from the events list.
-- `public/photos/news/`: images for news posts (set `image: "/photos/news/name.jpg"` on the post).
-
-Until there are real photos, the site shows the purple-to-green placeholders.
+Edit a file on GitHub, commit to `main`, and the site updates in about a minute.
 
 ## Live member numbers
 
-The member numbers come from the Thistle Connect and Thistle Aspire sign-up forms in Zite. While the site builds, it asks Zite for totals only (never names, emails or phone numbers) using the SQL in `src/lib/stats.ts`.
+`stats.js` holds the member totals shown on the site. Every hour, and on every change, `.github/workflows/deploy.yml` runs `.github/scripts/update-stats.mjs`, which asks Zite for fresh totals (never names, emails or phone numbers) and publishes them.
 
-To turn this on, create an API key in Zite (Account settings > Developer), then add it on GitHub as a repository secret named `ZITE_API_KEY` (Settings > Secrets and variables > Actions). Without the key the site uses `stats-snapshot.json`.
+This needs a repository secret named `ZITE_API_KEY` (Settings > Secrets and variables > Actions), holding an API key from Zite (Account settings > Developer). Without it, or if Zite can't be reached, the site shows the numbers saved in `stats.js`.
 
-## Deploying
+GitHub pauses hourly workflows in a repository with no commits for 60 days. If the numbers stop updating, re-enable the workflow in the Actions tab, or make any commit.
 
-`.github/workflows/deploy.yml` builds and publishes the site:
+## One-time setup
 
-- on every push to `main`
-- every hour, to refresh the member numbers and move finished events into "past"
-- whenever you press "Run workflow" in the Actions tab
+In the repository's Settings > Pages, set Source to "GitHub Actions" and set the custom domain to `thistle.network`.
 
-One-time setup: in the repository's Settings > Pages, set Source to "GitHub Actions", and keep thistle.network as the custom domain.
+## Previewing on your computer
 
-GitHub pauses scheduled workflows in a repository with no commits for 60 days. If the numbers stop updating, re-enable the workflow in the Actions tab, or make any commit.
-
-## Running it on your computer
-
-You need Node.js 20.9 or newer.
+The events list is loaded from `events.json`, which browsers block when a page is opened straight from a file. Run this in the folder, then open http://localhost:8000:
 
 ```bash
-npm ci
-npm run dev
+python3 -m http.server
 ```
-
-Then open http://localhost:3000. To use live numbers locally, put `ZITE_API_KEY=...` in a file called `.env.local` (it's git-ignored). `npm run build` creates the finished site in `out/`.
-
-## Once a year
-
-The take-home pay calculator on the Current page uses Scottish income tax bands and National Insurance rates. Update them each April in `src/components/paths/PayCalculator.tsx`.
-
-## How it's put together
-
-- `src/app/`: one folder per page, plus `globals.css` (all styles; colours come from the light and dark theme tokens at the top).
-- `src/components/`: the homepage sections, events carousel, gallery, news feed and the shared pieces.
-- `src/lib/content.ts`: turns the content files and photo folders into what the pages show.
-- `src/lib/stats.ts`: the Zite query.
