@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { formatShortDate } from "@/lib/format";
 import type { Event } from "@/types/event";
@@ -71,9 +72,9 @@ export default function EventsList({ events }: { events: Event[] }) {
                   {isPast(e) ? (
                     e.attended ? <><b>{e.attended}</b> came</> : null
                   ) : (
-                    <a className="btn btn-outline" href={e.cta.link}>Register interest</a>
+                    <Link className="btn btn-outline" href={e.cta.link}>Register interest</Link>
                   )}
-                  {isPast(e) && e.photos.length > 0 && <a className="event-photos" href={`/gallery#${e.id}`}>Photos →</a>}
+                  {isPast(e) && e.photos.length > 0 && <Link className="event-photos" href={`/gallery#${e.id}`}>Photos →</Link>}
                 </div>
               </article>
             );

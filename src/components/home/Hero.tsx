@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBase } from "@/lib/base-path";
 import ThistleLogo from "@/components/brand/ThistleLogo";
 import JoinModal from "./JoinModal";
 import HeroParallaxFallback from "./HeroParallaxFallback";
@@ -23,7 +24,7 @@ export default function Hero({ content, photos }: HeroProps) {
     <section id="hero" aria-label="Thistle Network introduction">
       <div className="hero-wrapper">
         <div className="decor thistle-sticker">
-          <Image className="thistle-icon" src="/brand/emblem-light.png" alt="" width={375} height={411} />
+          <Image className="thistle-icon" src={withBase("/brand/emblem-light.png")} alt="" width={375} height={411} />
         </div>
 
         <svg className="decor doodle-star" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

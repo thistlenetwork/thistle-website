@@ -3,6 +3,7 @@ import path from "node:path";
 import { events as eventEntries } from "@/content/events";
 import { news } from "@/content/news";
 import { FORMS } from "@/content/site";
+import { withBase } from "@/lib/base-path";
 import type { Event, EventStatus } from "@/types/event";
 import type { GalleryAlbum } from "@/types/gallery";
 import type { HeroPhoto } from "@/types/home";
@@ -15,8 +16,8 @@ import type { NewsPost } from "@/types/news";
  */
 
 const PHOTO_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif"]);
-const PLACEHOLDER_EVENT = "/images/placeholders/event.png";
-const PLACEHOLDER_HERO = (n: number) => `/images/placeholders/hero-${n}.png`;
+const PLACEHOLDER_EVENT = withBase("/images/placeholders/event.png");
+const PLACEHOLDER_HERO = (n: number) => withBase(`/images/placeholders/hero-${n}.png`);
 
 /** Photos in a folder under public/, sorted by file name. Empty when the folder doesn't exist. */
 function photosIn(folder: string, alt: string): Media[] {
@@ -28,7 +29,7 @@ function photosIn(folder: string, alt: string): Media[] {
     .sort((a, b) => a.localeCompare(b, "en", { numeric: true }))
     .map((file, index) => ({
       id: `${folder}/${file}`,
-      url: `/${folder}/${encodeURIComponent(file)}`,
+      url: withBase(`/${folder}/${encodeURIComponent(file)}`),
       width: 1200,
       height: 900,
       alternativeText: `${alt} photo ${index + 1}`,
@@ -104,6 +105,6 @@ export function getNewsPosts(): NewsPost[] {
     newsType: entry.type,
     postBody: entry.body,
     pinned: Boolean(entry.pinned),
-    postImage: entry.image ? { id: `${entry.id}-image`, url: entry.image, width: 900, height: 560, alternativeText: "" } : undefined,
+    postImage: entry.image ? { id: `${entry.id}-image`, url: withBase(entry.image), width: 900, height: 560, alternativeText: "" } : undefined,
   }));
 }

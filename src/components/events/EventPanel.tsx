@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Icon from "@/components/ui/Icon";
 
 export type PanelItem = {
@@ -49,9 +50,9 @@ export default function EventPanel({ item, liked, onLike, onShare }: EventPanelP
         <span className="post-date">{item.dateLabel}</span>
         <span className={`status-tag status-${item.status}`}>{item.statusLabel}</span>
       </div>
-      <a className="insta-cta" href={item.cta.link}>
+      <Link className="insta-cta" href={item.cta.link}>
         {item.cta.text} <span aria-hidden="true">↗</span>
-      </a>
+      </Link>
     </article>
   );
 }

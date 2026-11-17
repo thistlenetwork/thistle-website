@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState, type CSSProperties, type Keyb
 import Image from "next/image";
 import Icon from "@/components/ui/Icon";
 import EventPanel, { type PanelItem } from "./EventPanel";
+import { withBase } from "@/lib/base-path";
 import { formatLongDate } from "@/lib/format";
 import type { Event } from "@/types/event";
 
@@ -164,7 +165,7 @@ export default function EventCarousel({ events, startIndex }: EventCarouselProps
   };
 
   const share = async () => {
-    const link = new URL(active.item.cta.link, window.location.href).href;
+    const link = new URL(withBase(active.item.cta.link), window.location.href).href;
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(link);

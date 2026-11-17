@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBase } from "@/lib/base-path";
 import Icon from "@/components/ui/Icon";
 import { formatShortDate } from "@/lib/format";
 import type { NewsPost } from "@/types/news";
@@ -15,7 +16,7 @@ export default function PostHeader({ post }: { post: NewsPost }) {
       )}
       <div className="post-header">
         <div className="avatar">
-          <Image src="/brand/emblem-light.png" alt="" width={375} height={411} style={{ objectFit: "contain" }} />
+          <Image src={withBase("/brand/emblem-light.png")} alt="" width={375} height={411} style={{ objectFit: "contain" }} />
         </div>
         <div className="meta">
           <div className="meta-top">

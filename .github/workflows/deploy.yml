@@ -29,12 +29,15 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - id: pages
+        uses: actions/configure-pages@v5
       - name: Build
         run: npm run build
         env:
           # Optional. Without it the site uses src/content/stats-snapshot.json.
           ZITE_API_KEY: ${{ secrets.ZITE_API_KEY }}
-      - uses: actions/configure-pages@v5
+          # Empty when the site has its own domain, "/<repo name>" when it doesn't.
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
