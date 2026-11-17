@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import Button from "@/components/ui/Button";
 import { formatShortDate } from "@/lib/format";
 import type { Event } from "@/types/event";
 
-/** The full events list with "coming up / past" and place filters. */
-export default function EventsList({ events }: { events: Event[] }) {
+/**
+ * The events list with "coming up / past" and place filters. With `limit` (the homepage),
+ * it shows that many events, drops the place filters and links to the full list.
+ */
+export default function EventsList({ events, limit }: { events: Event[]; limit?: number }) {
   const isPast = (e: Event) => e.status === "previous" || e.status === "past";
   const hasUpcoming = events.some((e) => !isPast(e));
   const [when, setWhen] = useState<"upcoming" | "past">(hasUpcoming ? "upcoming" : "past");
@@ -22,7 +26,8 @@ export default function EventsList({ events }: { events: Event[] }) {
       const da = a.date ?? "9999";
       const db = b.date ?? "9999";
       return when === "past" ? db.localeCompare(da) : da.localeCompare(db);
-    });
+    })
+    .slice(0, limit);
 
   return (
     <>
@@ -31,13 +36,15 @@ export default function EventsList({ events }: { events: Event[] }) {
           <button type="button" aria-pressed={when === "upcoming"} onClick={() => setWhen("upcoming")}>Coming up</button>
           <button type="button" aria-pressed={when === "past"} onClick={() => setWhen("past")}>Past</button>
         </div>
-        <div className="chips" role="group" aria-label="Where">
-          {[["all", "Everywhere"], ...places.map((p) => [p, p])].map(([value, label]) => (
-            <button key={value} type="button" className="chip" aria-pressed={place === value} onClick={() => setPlace(value)}>
-              {label}
-            </button>
-          ))}
-        </div>
+        {!limit && (
+          <div className="chips" role="group" aria-label="Where">
+            {[["all", "Everywhere"], ...places.map((p) => [p, p])].map(([value, label]) => (
+              <button key={value} type="button" className="chip" aria-pressed={place === value} onClick={() => setPlace(value)}>
+                {label}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
       <div className="event-list">
         {rows.length === 0 ? (
@@ -81,6 +88,11 @@ export default function EventsList({ events }: { events: Event[] }) {
           })
         )}
       </div>
+      {limit && (
+        <div className="list-more">
+          <Button href="/events" variant="outline">See all events</Button>
+        </div>
+      )}
     </>
   );
 }

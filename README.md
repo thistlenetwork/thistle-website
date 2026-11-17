@@ -23,7 +23,7 @@ Edit a file on GitHub, commit to `main`, and the site rebuilds and goes live in 
 Drop images into these folders. No code changes are needed. Keep each file under about 400 KB (export JPGs at around 1600px wide).
 
 - `public/photos/hero/`: up to 8 photos for the homepage scrapbook. File names become the polaroid captions (`glasgow-2026.jpg` becomes "GLASGOW 2026").
-- `public/photos/events/<event id>/`: photos for one event, e.g. `public/photos/events/flip-out/`. The first file is the cover in the events carousel, and the event appears in the Gallery automatically.
+- `public/photos/events/<event id>/`: photos for one event, e.g. `public/photos/events/flip-out/`. The event then appears in the Gallery automatically, with a "Photos" link from the events list.
 - `public/photos/news/`: images for news posts (set `image: "/photos/news/name.jpg"` on the post).
 
 Until there are real photos, the site shows the purple-to-green placeholders.

@@ -14,7 +14,6 @@ export type Event = {
   attended?: number;
   status: EventStatus;
   cta: Cta;
-  coverImage: Media;
   /** Photos from public/photos/events/<id>/, in file-name order. */
   photos: Media[];
 };

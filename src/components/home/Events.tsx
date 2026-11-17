@@ -1,5 +1,4 @@
-import EventCarousel from "@/components/events/EventCarousel";
-import { arrangeEvents, startingIndex } from "@/lib/event-order";
+import EventsList from "@/components/events/EventsList";
 import type { Event } from "@/types/event";
 import type { EventsSectionContent } from "@/types/home";
 
@@ -8,21 +7,18 @@ type EventsProps = {
   events: Event[];
 };
 
-/**
- * The events section header (server-rendered) and the carousel (client). The
- * events are ordered on the server, so the first paint already shows the
- * right slide in the middle.
- */
+/** The homepage events section: a few events, with a link to the full list on the Events page. */
 export default function Events({ content, events }: EventsProps) {
-  const ordered = arrangeEvents(events);
   return (
-    <section id="events" className="section-container">
-      <header className="section-header">
-        <span className="eyebrow">{content.eyebrow}</span>
-        <h2>{content.header}</h2>
-        <p className="section-intro">{content.description}</p>
-      </header>
-      <EventCarousel events={ordered} startIndex={startingIndex(ordered)} />
+    <section id="events" className="band" aria-labelledby="events-title">
+      <div className="wrap">
+        <div className="section-head">
+          <span className="eyebrow">{content.eyebrow}</span>
+          <h2 id="events-title">{content.header}</h2>
+          <p>{content.description}</p>
+        </div>
+        <EventsList events={events} limit={3} />
+      </div>
     </section>
   );
 }

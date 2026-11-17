@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import Events from "@/components/home/Events";
 import EventsList from "@/components/events/EventsList";
 import Button from "@/components/ui/Button";
 import Footer from "@/layout/Footer";
 import PageHeader from "@/layout/PageHeader";
-import { home } from "@/content/home";
 import { getEvents } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -33,8 +31,6 @@ export default function EventsPage() {
           </p>
         )}
       </PageHeader>
-
-      <Events content={home.eventsSection} events={events} />
 
       <section className="band">
         <div className="wrap">

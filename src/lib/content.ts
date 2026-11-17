@@ -16,7 +16,6 @@ import type { NewsPost } from "@/types/news";
  */
 
 const PHOTO_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif"]);
-const PLACEHOLDER_EVENT = withBase("/images/placeholders/event.png");
 const PLACEHOLDER_HERO = (n: number) => withBase(`/images/placeholders/hero-${n}.png`);
 
 /** Photos in a folder under public/, sorted by file name. Empty when the folder doesn't exist. */
@@ -70,7 +69,6 @@ export function getEvents(): Event[] {
       attended: entry.attended,
       status,
       photos,
-      coverImage: photos[0] ?? { id: `${entry.id}-cover`, url: PLACEHOLDER_EVENT, width: 800, height: 1000, alternativeText: "" },
       cta: upcomingEvent
         ? { text: "Register interest", link: entry.registerUrl ?? FORMS.current }
         : photos.length > 0

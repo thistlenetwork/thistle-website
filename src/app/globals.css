@@ -965,192 +965,6 @@ section[id], footer[id] { scroll-margin-top: calc(var(--nav-height) + 18px); }
             }
         
 }
-    /* ===== EVENTS COMPONENT STYLES ===== */
-
-    :root {
-      
-      
-      
-      
-      
-      
-      
-      --line: color-mix(in srgb, var(--purple) 28%, transparent);
-      /* The selected photo and Instagram chrome share one exact width. */
-      --post-width: min(390px, calc(100vw - 24px));
-      --slide-width: var(--post-width);
-      --media-height: clamp(320px, 36vw, 390px);
-      --slide-overlap: 54px;
-    }
-
-    
-    
-    
-    #events button,
-#events a { -webkit-tap-highlight-color: transparent; }
-    #events button { font: inherit; }
-
-    #events.section-container { max-width: 1440px; margin: 58px auto 80px; padding: 0 24px; }
-    #events .section-header { text-align: center; margin: 0 auto 30px; }
-    #events .eyebrow {
-      display: inline-block; margin-bottom: 12px; color: var(--mono);
-      font: 500 12px/1.4 var(--f-mono), monospace; letter-spacing: .14em; text-transform: uppercase;
-    }
-    #events h1 {
-      margin: 0; font: 700 clamp(30px, 4vw, 48px)/1.08 var(--f-display), sans-serif;
-      letter-spacing: -.04em;
-    }
-    #events .section-intro { max-width: 580px; margin: 13px auto 0; color: var(--ink-soft); font-size: 14px; line-height: 1.65; }
-
-    /* The Instagram post chrome is fixed in the composition; only the photo rail moves. */
-    #events .instagram-carousel { position: relative; width: 100%; margin: 0 auto; }
-    #events .insta-header,
-#events .insta-details {
-      position: relative; z-index: 4; width: var(--post-width); margin-inline: auto;
-      background: color-mix(in srgb, var(--paper) 98%, transparent); border: 1px solid var(--line);
-      box-shadow: 0 5px 18px rgba(26, 26, 26, .07);
-    }
-    #events .insta-header {
-      display: flex; align-items: center; gap: 10px; padding: 11px 14px;
-      border-radius: 10px 10px 0 0;
-    }
-    #events .avatar-wrap {
-      flex: 0 0 30px; width: 30px; height: 30px; padding: 2px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--purple), var(--lavender) 55%, var(--green));
-    }
-    #events .insta-avatar {
-      display: grid; width: 100%; height: 100%; place-items: center; border-radius: 50%;
-      background: var(--paper); color: var(--purple-text); font: 700 10px var(--f-display), sans-serif;
-    }
-    #events .insta-author { font-size: 12px; font-weight: 700; line-height: 1.35; }
-    #events .insta-location { margin-top: 2px; color: var(--mono); font-size: 11px; line-height: 1.35; }
-    #events .header-marker { margin-left: auto; color: var(--purple-text); font-size: 19px; letter-spacing: 1px; }
-
-    /*
-      The rail is only as tall as the media slot. Its scroll viewport extends a little
-      farther downward so the background photos can sit lower behind the caption panel.
-      The selected photo is exactly --post-width wide and --media-height tall, touching
-      the fixed Instagram header and details panel like one complete social post.
-    */
-    #events .photo-carousel { position: relative; z-index: 1; width: 100%; height: var(--media-height); isolation: isolate; }
-    #events .photo-track {
-      position: absolute; top: 0; left: 0; right: 0;
-      display: flex; align-items: flex-start; gap: 0; width: 100%;
-      height: calc(var(--media-height) + 26px);
-      padding: 0 calc((100% - var(--slide-width)) / 2);
-      overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
-      scroll-snap-type: x mandatory; scroll-behavior: smooth; overscroll-behavior-x: contain;
-      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      isolation: isolate;
-    }
-    #events .photo-track::-webkit-scrollbar { display: none; }
-    #events .event-slide {
-      position: relative; z-index: 1; display: block; flex: 0 0 var(--slide-width); width: var(--slide-width);
-      height: var(--media-height); overflow: hidden; padding: 0; border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
-      border-radius: 3px; background: var(--paper-dim); color: var(--ink); text-align: left;
-      scroll-snap-align: center; cursor: pointer; opacity: .66;
-      transform: translateY(17px) scale(.84) rotate(var(--tilt, 0deg));
-      box-shadow: 0 12px 26px rgba(26,26,26,.12);
-      transition: opacity .28s ease, transform .28s ease, box-shadow .28s ease;
-    }
-    /* Overlap the side images slightly; z-index keeps the full-size selected image in front. */
-    #events .event-slide + .event-slide { margin-left: calc(var(--slide-overlap) * -1); }
-    #events .event-slide.is-active {
-      z-index: 3; opacity: 1; border: 0; border-radius: 0;
-      transform: translateY(0) scale(1) rotate(0); box-shadow: none;
-    }
-    #events .event-slide img { display: block; width: 100%; height: 100%; object-fit: cover; filter: sepia(.3) contrast(.9) brightness(1.05); }
-    #events .slide-caption {
-      position: absolute; inset: auto 0 0; padding: 32px 16px 15px; color: white;
-      background: linear-gradient(transparent, rgba(20, 15, 25, .78));
-    }
-    #events .slide-caption small { display: block; margin-bottom: 5px; font: 500 10px var(--f-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
-    #events .slide-caption strong { display: block; font: 600 19px/1.2 var(--f-display), sans-serif; }
-
-    #events .boundary-slide {
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px;
-      padding: 28px; border: 1px dashed color-mix(in srgb, var(--purple) 55%, transparent); background:
-        linear-gradient(color-mix(in srgb, var(--paper) 86%, transparent), color-mix(in srgb, var(--paper) 86%, transparent)),
-        repeating-linear-gradient(0deg, transparent, transparent 23px, color-mix(in srgb, var(--purple) 12%, transparent) 24px),
-        repeating-linear-gradient(90deg, transparent, transparent 23px, color-mix(in srgb, var(--purple) 12%, transparent) 24px);
-      text-align: center;
-    }
-    #events .boundary-symbol { display: grid; width: 56px; height: 56px; place-items: center; border: 1px solid var(--purple); border-radius: 50%; color: var(--purple-text); font-size: 26px; }
-    #events .boundary-slide .slide-caption { position: static; padding: 0; color: var(--ink); background: none; }
-    #events .boundary-slide .slide-caption small { color: var(--mono); }
-    #events .boundary-slide .slide-caption strong { font-size: clamp(20px, 2.3vw, 27px); }
-    #events .boundary-slide.is-active { border: 0; border-radius: 0; }
-
-    /* Persistent, themed arrow controls: visible at rest, not only on hover. */
-    #events .carousel-nav {
-      position: absolute; z-index: 5; top: 50%; transform: translateY(-50%);
-      display: grid; place-items: center; width: 46px; height: 46px; padding: 0;
-      border: 1px solid color-mix(in srgb, var(--purple) 45%, transparent); border-radius: 50%;
-      color: var(--purple-text); background: var(--paper); box-shadow: 0 5px 16px rgba(26,26,26,.16);
-      cursor: pointer; transition: background .2s ease, color .2s ease, transform .2s ease;
-    }
-    #events .carousel-nav svg { width: 19px; height: 19px; }
-    #events .carousel-nav:hover { transform: translateY(-50%) scale(1.06); color: var(--white); background: var(--purple); }
-    #events .carousel-nav:disabled { opacity: .38; cursor: not-allowed; box-shadow: none; }
-    #events .carousel-nav:disabled:hover { transform: translateY(-50%); color: var(--purple-text); background: var(--paper); }
-    #events .nav-prev { left: max(4px, calc(50% - 560px)); }
-    #events .nav-next { right: max(4px, calc(50% - 560px)); }
-
-    #events .insta-details { padding: 13px 15px 15px; border-radius: 0 0 10px 10px; }
-    #events .insta-action-row { display: flex; align-items: center; gap: 14px; margin-bottom: 9px; }
-    #events .icon-button { display: inline-grid; place-items: center; width: 28px; height: 28px; padding: 2px; border: 0; color: var(--ink); background: transparent; cursor: pointer; }
-    #events .icon-button svg { width: 23px; height: 23px; }
-    #events .icon-button:hover,
-#events .icon-button:focus-visible { color: var(--purple-text); }
-    #events .icon-button[aria-pressed="true"] { color: var(--purple-text); }
-    #events .save-button { margin-left: auto; }
-    #events .insta-likes { margin-bottom: 6px; font-size: 12px; font-weight: 700; }
-    #events .insta-title { margin: 0 0 6px; font: 700 19px/1.22 var(--f-display), sans-serif; }
-    #events .insta-desc { margin: 0 0 12px; color: var(--ink-soft); font-size: 12px; line-height: 1.55; }
-    #events .insta-desc strong { margin-right: 4px; color: var(--ink); }
-    #events .post-meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 12px; }
-    #events .post-date { color: var(--mono); font: 10px var(--f-mono), monospace; text-transform: uppercase; letter-spacing: .06em; }
-    #events .status-tag { padding: 5px 8px; border-radius: 3px; font: 600 9px var(--f-mono), monospace; text-transform: uppercase; letter-spacing: .04em; }
-    #events .status-next { color: var(--white); background: var(--purple); }
-    #events .status-upcoming { color: var(--white); background: var(--green); }
-    #events .status-past { color: var(--ink); background: var(--paper-dim); border: 1px solid color-mix(in srgb, var(--mono) 55%, transparent); }
-    #events .insta-cta {
-      display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 42px; padding: 11px 14px;
-      border: 1px solid var(--purple); border-radius: 5px; color: var(--white); background: var(--purple);
-      text-decoration: none; text-align: center; font-size: 12px; font-weight: 700; transition: background .2s ease, color .2s ease, transform .2s ease;
-    }
-    #events .insta-cta:hover { color: var(--purple-text); background: var(--paper);   transform: translateY(-1px);}
-    #events .carousel-help { margin: 15px auto 0; color: var(--mono); text-align: center; font: 10px var(--f-mono), monospace; letter-spacing: .04em; }
-    #events .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-
-    #events :focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
-    @media (max-width: 700px) {
-
-      :root { --post-width: min(390px, calc(100vw - 24px)); --slide-width: var(--post-width); --media-height: clamp(285px, 92vw, 360px); --slide-overlap: 42px; }
-      #events.section-container { margin-top: 36px; padding-inline: 12px; }
-      #events .section-header { margin-bottom: 23px; }
-      #events .section-intro { font-size: 13px; }
-      #events .carousel-nav { width: 39px; height: 39px; }
-      #events .nav-prev { left: 4px; }
-      #events .nav-next { right: 4px; }
-    
-}
-    @media (max-width: 420px) {
-
-      :root { --post-width: calc(100vw - 24px); --slide-width: var(--post-width); --media-height: clamp(270px, 92vw, 330px); --slide-overlap: 36px; }
-      #events .insta-details { padding-inline: 12px; }
-      #events .insta-title { font-size: 17px; }
-      #events .carousel-nav { width: 35px; height: 35px; }
-      #events .nav-prev { left: 2px; }
-      #events .nav-next { right: 2px; }
-    
-}
-    @media (prefers-reduced-motion: reduce) {
-
-      
-    
-}
   /* ===== ABOUT COMPONENT STYLES ===== */
 
         /* =========================================
@@ -2558,12 +2372,11 @@ img, svg { max-width: 100%; }
   40% { transform: scale(1.25); }
   100% { transform: scale(1); }
 }
-.icon-button.is-liked svg, .like-btn.liked svg { fill: currentColor; }
-.icon-button.is-liked, .like-btn.liked { animation: heart-pop 320ms ease-out; }
-.icon-button.is-saved svg { fill: currentColor; }
+.like-btn.liked svg { fill: currentColor; }
+.like-btn.liked { animation: heart-pop 320ms ease-out; }
 .emoji-pill { cursor: pointer; }
 .emoji-pill.is-picked { outline: 2px solid currentColor; outline-offset: 1px; }
-@media (prefers-reduced-motion: reduce) { .icon-button.is-liked, .like-btn.liked { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .like-btn.liked { animation: none; } }
 
 .visually-hidden {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -2836,6 +2649,7 @@ a { color: inherit; }
 
 /* Events page list */
 .event-list { display: flex; flex-direction: column; gap: 12px; }
+.list-more { margin-top: 24px; }
 .event-row { display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; gap: 22px; align-items: center; background: var(--card); border: 1px solid color-mix(in srgb, var(--purple) 14%, transparent); border-radius: 14px; padding: 18px 22px; }
 .event-date { text-align: center; border-right: 1px solid color-mix(in srgb, var(--ink) 12%, transparent); padding-right: 18px; }
 .event-date b { display: block; font: 800 30px/1 var(--f-display); color: var(--purple-text); }
