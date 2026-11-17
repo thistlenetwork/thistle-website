@@ -1,0 +1,164 @@
+{
+  "updated": "2026-10-22",
+  "since": "2026-04-24",
+  "members": 151,
+  "employers": 65,
+  "places": 17,
+  "providers": 22,
+  "last30": 26,
+  "friendShare": 54,
+  "graduateShare": 81,
+  "growth": [
+    {
+      "month": "2026-04",
+      "joined": 3,
+      "total": 3
+    },
+    {
+      "month": "2026-05",
+      "joined": 24,
+      "total": 27
+    },
+    {
+      "month": "2026-06",
+      "joined": 11,
+      "total": 38
+    },
+    {
+      "month": "2026-07",
+      "joined": 28,
+      "total": 66
+    },
+    {
+      "month": "2026-08",
+      "joined": 41,
+      "total": 107
+    },
+    {
+      "month": "2026-09",
+      "joined": 24,
+      "total": 131
+    },
+    {
+      "month": "2026-10",
+      "joined": 20,
+      "total": 151
+    }
+  ],
+  "namedEmployers": [
+    "JP Morgan",
+    "Morgan Stanley",
+    "Barclays",
+    "ScottishPower",
+    "Accenture",
+    "BBC",
+    "NatWest",
+    "AECOM",
+    "Diageo",
+    "Heriot-Watt University",
+    "IBM",
+    "Leidos",
+    "Leonardo",
+    "Lloyds Banking Group",
+    "M&G",
+    "Aberdeen Group",
+    "BAE Systems",
+    "Baillie Gifford",
+    "Balfour Beatty",
+    "Deloitte",
+    "Royal London"
+  ],
+  "topPlaces": [
+    [
+      "Glasgow",
+      93
+    ],
+    [
+      "Edinburgh",
+      36
+    ],
+    [
+      "Greenock",
+      4
+    ],
+    [
+      "Aberdeen",
+      3
+    ],
+    [
+      "Falkirk",
+      2
+    ],
+    [
+      "Stirling",
+      2
+    ]
+  ],
+  "topProviders": [
+    [
+      "University of Strathclyde",
+      22
+    ],
+    [
+      "Heriot-Watt University",
+      8
+    ],
+    [
+      "University of Glasgow",
+      8
+    ],
+    [
+      "Glasgow Caledonian University",
+      5
+    ],
+    [
+      "QA",
+      3
+    ],
+    [
+      "UHI",
+      3
+    ]
+  ],
+  "sectors": [
+    [
+      "Technology",
+      77
+    ],
+    [
+      "Engineering",
+      26
+    ],
+    [
+      "Other",
+      18
+    ],
+    [
+      "Business",
+      12
+    ],
+    [
+      "Finance",
+      8
+    ],
+    [
+      "Accountancy",
+      7
+    ],
+    [
+      "HR",
+      3
+    ]
+  ],
+  "routes": [
+    [
+      "Graduate",
+      123
+    ],
+    [
+      "Modern",
+      28
+    ]
+  ],
+  "aspiring": 19
+}
