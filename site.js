@@ -130,7 +130,8 @@
     const past = events.filter(isPast);
     const came = past.reduce((a, e) => a + (e.attended || 0), 0);
     const biggest = past.reduce((a, e) => ((e.attended || 0) > (a?.attended || 0) ? e : a), null);
-    const last = past.slice().sort((a, b) => parseDate(b.date) - parseDate(a.date))[0];
+    // "last time out" only uses events whose attendance has been filled in
+    const last = past.filter((e) => Number.isFinite(e.attended)).sort((a, b) => parseDate(b.date) - parseDate(a.date))[0];
     return { past, came, biggest, last };
   };
 
