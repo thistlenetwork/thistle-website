@@ -3,3 +3,5 @@
 /_old/
 # local Claude app settings (contain paths on this computer)
 /.claude/
+# built by the deploy workflow
+/_site/

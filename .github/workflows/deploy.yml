@@ -1,5 +1,7 @@
 # Publishes the site to GitHub Pages. There is no build step: the pages are plain HTML.
-# Before each publish, update-stats.mjs refreshes the member numbers in stats.js from Zite.
+# Only the site files are published; the README, scripts and workflows stay in the repo.
+# Before each publish, update-stats.mjs refreshes the member numbers in stats.js from Zite,
+# and update-spaces.mjs checks how many spaces are left on upcoming events.
 # Runs on every push to main, every hour (to keep the numbers live), and on demand from the Actions tab.
 name: Deploy
 
@@ -34,9 +36,13 @@ jobs:
         run: node .github/scripts/update-stats.mjs
         env:
           ZITE_API_KEY: ${{ secrets.ZITE_API_KEY }}
+      - name: Check spaces left on upcoming events
+        run: node .github/scripts/update-spaces.mjs
+      - name: Collect the site files (leaves out the README, scripts and workflows)
+        run: rsync -a --exclude '.git*' --exclude '.github' --exclude 'README.md' --exclude '_site' ./ _site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v5

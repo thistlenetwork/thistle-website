@@ -1,0 +1,7 @@
+/* Brand fonts, self-hosted so no visitor data goes to other sites.
+   Bricolage Grotesque: headings and body text (SIL Open Font License).
+   Delight Bold: numbers and short labels. Licensed font: add its web file as assets/fonts/delight-bold.woff2 and the url() line below.
+     Until that file exists, numbers and labels fall back to Bricolage Grotesque.
+   Body text also uses Bricolage Grotesque; its optical-size axis adjusts the letters for small sizes automatically. */
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 200 800; font-display: swap; src: url(assets/fonts/bricolage-grotesque.woff2) format("woff2-variations"), url(assets/fonts/bricolage-grotesque.woff2) format("woff2"); }
+@font-face { font-family: "Delight"; font-style: normal; font-weight: 700; font-display: swap; src: local("Delight Bold"), local("Delight-Bold"); } /* add: , url(assets/fonts/delight-bold.woff2) format("woff2") once the file is in assets/fonts */

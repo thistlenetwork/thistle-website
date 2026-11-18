@@ -4,10 +4,30 @@
   const EMAIL = "general@thistle.network";
   const page = document.body.dataset.page || "home";
 
+  // Keep beta and preview copies out of search results; only the real domain is indexed.
+  if (!/^(www\.)?thistle\.network$/.test(location.hostname)) {
+    const robots = document.createElement("meta");
+    robots.name = "robots"; robots.content = "noindex, nofollow";
+    document.head.append(robots);
+  }
+
   const store = {
     get(k, d) { try { const v = localStorage.getItem("tn:" + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
     set(k, v) { try { localStorage.setItem("tn:" + k, JSON.stringify(v)); } catch (e) {} }
   };
+
+  // escape text from events.json / stats.js before it goes into the page
+  const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+
+  // skip link for keyboard and screen-reader users
+  const mainEl = document.querySelector("main");
+  let skipEl = null;
+  if (mainEl) {
+    if (!mainEl.id) mainEl.id = "main";
+    mainEl.setAttribute("tabindex", "-1");
+    skipEl = document.createElement("a");
+    skipEl.className = "skip"; skipEl.href = "#" + mainEl.id; skipEl.textContent = "Skip to content";
+  }
 
   const icon = {
     sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
@@ -38,9 +58,10 @@
     <div class="header-tools">
       <button class="icon-btn" id="theme-btn" type="button" aria-label="Switch colour theme"></button>
       <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">${icon.menu}</button>
-      <a class="btn btn-primary" href="join.html">Register to join</a>
+      <a class="btn btn-primary" href="join.html"><span>Register<span class="hide-sm"> to join</span></span></a>
     </div></div>`;
   document.body.prepend(header);
+  if (skipEl) document.body.prepend(skipEl); // first thing a keyboard user reaches
 
   // footer
   const footer = document.createElement("footer");
@@ -52,13 +73,14 @@
         <a href="https://www.instagram.com/thistlenetwork/" aria-label="Instagram">${icon.instagram}</a>
         <a href="https://www.tiktok.com/@thistlenetwork" aria-label="TikTok">${icon.tiktok}</a>
       </div></div>
-    <div><h4>Network</h4><ul>
+    <div><h2>Network</h2><ul>
       <li><a href="aspiring.html">Aspiring apprentices</a></li><li><a href="current.html">Current apprentices</a></li>
       <li><a href="events.html">Events</a></li><li><a href="about.html">About the network</a></li></ul></div>
-    <div><h4>Get involved</h4><ul>
+    <div><h2>Get involved</h2><ul>
       <li><a href="join.html">Register to join</a></li><li><a href="about.html#employers">For employers</a></li>
-      <li><a href="about.html#contact">Contact us</a></li><li><a href="https://thistle.network/privacy.html">Privacy policy</a></li></ul></div>
-    <div class="fine"><span>© ${new Date().getFullYear()} The Thistle Network</span><span>Made by apprentices, for apprentices, in Scotland.</span></div>
+      <li><a href="about.html#contact">Contact us</a></li></ul></div>
+    <div class="fine"><span>© ${new Date().getFullYear()} The Thistle Network. Made by apprentices, for apprentices, in Scotland.</span>
+      <nav aria-label="Policies"><ul class="fine-links"><li><a href="privacy.html">Privacy policy</a></li></ul></nav></div>
   </div>`;
   document.body.append(footer);
 
@@ -75,7 +97,14 @@
 
   // mobile menu
   const menuBtn = document.getElementById("menu-btn"), siteNav = document.getElementById("site-nav");
-  menuBtn.addEventListener("click", () => { const o = siteNav.classList.toggle("open"); menuBtn.setAttribute("aria-expanded", o); });
+  const setMenu = (open) => {
+    siteNav.classList.toggle("open", open); menuBtn.setAttribute("aria-expanded", open);
+    menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    if (open) siteNav.querySelector("a")?.focus();
+  };
+  menuBtn.addEventListener("click", () => setMenu(!siteNav.classList.contains("open")));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && siteNav.classList.contains("open")) { setMenu(false); menuBtn.focus(); } });
+
 
   // toast
   const toastEl = document.createElement("div"); toastEl.className = "toast"; toastEl.setAttribute("role", "status"); document.body.append(toastEl);
@@ -118,37 +147,61 @@
 
   const fmtLong = (d) => parseDate(d).toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
 
+  // who an event is for: "current", "aspiring" or "all" (set as "for" in events.json; missing means current)
+  const AUDIENCE = { current: ["pill-current", "Current apprentices"], aspiring: ["pill-aspiring", "Aspiring apprentices"], all: ["pill-plain", "Open to all"] };
+  const audienceOf = (e) => (e.for in AUDIENCE ? e.for : "current");
+  const forAudience = (events, who) => !who || who === "all" ? events : events.filter((e) => audienceOf(e) === who || audienceOf(e) === "all");
+  const signUpFor = (e) => e.cta || (audienceOf(e) === "aspiring" ? FORMS.aspiring : FORMS.current);
+
+  // time, venue, cost and ages, shown when events.json has them
+  const facts = (e) => {
+    const f = [e.time && `Time: ${esc(e.time)}`, e.venue && `Venue: ${esc(e.venue)}`, e.cost && `Cost: ${esc(e.cost)}`, e.ages && `Ages: ${esc(e.ages)}`].filter(Boolean);
+    return f.length ? `<div class="facts">${f.map((x) => `<span>${x}</span>`).join("")}</div>` : "";
+  };
+
   const eventRow = (e) => {
-    const d = e.date ? parseDate(e.date) : null, past = isPast(e);
+    const d = e.date ? parseDate(e.date) : null, past = isPast(e), [cls, who] = AUDIENCE[audienceOf(e)];
     let status;
-    if (past) status = `<div class="status"><b style="color:var(--ink)">${e.attended}</b> came</div>`;
-    else status = `<div class="status"><a class="btn btn-ghost" href="${e.cta || FORMS.current}">Register interest</a></div>`;
+    if (past) status = `<div class="status"><b style="color:var(--ink)">${esc(e.attended)}</b> came</div>`;
+    else if (e.spaces && e.spaces.full) status = `<div class="status"><b style="color:var(--ink)">Sold out</b></div>`;
+    else {
+      // spaces left, filled in hourly by the deploy from the event's Zite form (see update-spaces.mjs)
+      const left = e.spaces && Number.isFinite(e.spaces.left) ? e.spaces.left : null;
+      const spacesLine = left === null ? "" : `<small class="spaces">${left === 1 ? "1 space left" : `${left} spaces left`}</small>`;
+      status = `<div class="status"><a class="btn btn-ghost" href="${esc(signUpFor(e))}">${e.cta ? "Sign up" : "Register interest"}<span class="sr-only"> for ${esc(e.title)}</span></a>${spacesLine}</div>`;
+    }
     return `<article class="event">
       <div class="date">${d ? `<b>${d.getDate()}</b><small>${MONTHS[d.getMonth()]} ${d.getFullYear()}</small>` : `<b>TBC</b><small>Date soon</small>`}</div>
-      <div><h3>${e.title}</h3><p>${e.blurb || ""}</p>
-        <div class="meta"><span class="pill pill-current">${e.place}</span><span class="pill pill-plain">${past ? "Past" : d ? "Upcoming" : "Date to be confirmed"}</span></div></div>
+      <div><h3>${esc(e.title)}</h3><p>${esc(e.blurb)}</p>${past ? "" : facts(e)}
+        <div class="meta"><span class="pill ${cls}">${who}</span><span class="pill pill-plain">${esc(e.place)}</span><span class="pill pill-plain">${past ? "Past" : d ? "Upcoming" : "Date to be confirmed"}</span></div></div>
       ${status}</article>`;
   };
 
-  window.TN = { FORMS, EMAIL, store, toast, icon, loadEvents, nextEvent, eventTotals, isPast, startCountdown, eventRow, fmtLong, parseDate };
+  window.TN = { FORMS, EMAIL, store, toast, icon, esc, loadEvents, nextEvent, eventTotals, isPast, startCountdown, eventRow, fmtLong, parseDate, audienceOf, forAudience, AUDIENCE };
 
-  // shared "next event" block (home, aspiring, current, events)
+  // shared "next event" block (home, aspiring, current, events); data-next-event="all" | "current" | "aspiring"
   const nextBox = document.querySelector("[data-next-event]");
   if (nextBox) {
-    loadEvents().then((events) => {
+    const who = nextBox.dataset.nextEvent || "all";
+    loadEvents().then((allEvents) => {
+      const events = forAudience(allEvents, who);
       const ev = nextEvent(events), t = eventTotals(events);
       const more = `<div><a class="btn btn-purple" href="events.html">See all events ${icon.arrow}</a></div>`;
       if (ev) {
-        nextBox.innerHTML = `<div class="stack"><span class="eyebrow">Next event · ${ev.place}</span><h3>${ev.title}</h3><p class="lede">${fmtLong(ev.date)}. ${ev.blurb || ""}</p>${more}</div><div class="countdown" aria-label="Time until ${ev.title}"></div>`;
+        nextBox.innerHTML = `<div class="stack"><span class="eyebrow">Next event in ${esc(ev.place)}</span><h2>${esc(ev.title)}</h2><p class="lede">${fmtLong(ev.date)}. ${esc(ev.blurb)}</p>${facts(ev)}${more}</div><div class="countdown" aria-label="Time until ${esc(ev.title)}"></div>`;
         startCountdown(nextBox.querySelector(".countdown"), ev);
         return;
       }
       const tbc = events.find((e) => !e.date);
-      const lastLine = t.last ? ` Last time out, ${t.last.attended} apprentices came to ${t.last.title}.` : "";
+      const lastLine = t.last ? ` Last time out, ${esc(t.last.attended)} came to ${esc(t.last.title)}.` : "";
+      const hearFirst = who === "aspiring"
+        ? `Follow us on socials to hear first, or join the community.`
+        : `Follow us on socials to hear first, or join the community.`;
+      const aspiringBtn = who === "aspiring" ? `<div class="hero-actions"><a class="btn btn-primary" href="${FORMS.aspiring}">Register as aspiring</a><a class="btn btn-ghost" href="events.html">See all events</a></div>` : more;
       nextBox.innerHTML = tbc
-        ? `<div class="stack"><span class="eyebrow">Next up · ${tbc.place} · date coming soon</span><h3>${tbc.title}</h3><p class="lede">${tbc.blurb || ""}${lastLine}</p>${more}</div>`
-        : `<div class="stack"><span class="eyebrow">Next event</span><h3>New dates coming soon</h3><p class="lede">Follow us on Instagram to hear first.${lastLine}</p>${more}</div>`;
-      if (t.past.length) nextBox.insertAdjacentHTML("beforeend", `<div class="countdown" aria-label="Events so far"><div><b>${t.past.length}</b><small>events</small></div><div><b>${t.came}</b><small>came</small></div></div>`);
+        ? `<div class="stack"><span class="eyebrow">Next up in ${esc(tbc.place)}, date coming soon</span><h2>${esc(tbc.title)}</h2><p class="lede">${esc(tbc.blurb)}${lastLine}</p>${facts(tbc)}${more}</div>`
+        : `<div class="stack"><span class="eyebrow">Next event</span><h2>New dates coming soon</h2><p class="lede">${hearFirst}${lastLine}</p>${aspiringBtn}</div>`;
+      if (t.past.length) nextBox.insertAdjacentHTML("beforeend", `<div class="countdown" aria-label="Events so far"><div><b>${t.past.length}</b><small>events</small></div><div><b>${t.came}</b><small>spots filled</small></div></div>`);
     }).catch(() => { nextBox.innerHTML = `<p class="lede">Events didn't load. Refresh the page to try again.</p>`; });
   }
 
@@ -170,7 +223,7 @@
 
     // employer strip
     document.querySelectorAll("[data-employers]").forEach((el) => {
-      const items = [`<span class="lead">Our members work at</span>`, ...S.namedEmployers.map((n) => `<span>${n}</span>`), `<span>and ${nums.moreEmployers} more</span>`];
+      const items = [`<span class="lead">Our members work at</span>`, ...S.namedEmployers.map((n) => `<span>${esc(n)}</span>`), `<span>and ${nums.moreEmployers} more</span>`];
       el.innerHTML = items.join("") + items.join("");
     });
 
@@ -205,13 +258,24 @@
     });
 
     // bar breakdowns
+    // counts under 3 are folded into "Other" so no small group can be singled out
     const label = { Other: "Other fields" };
+    const MIN = 3;
     document.querySelectorAll("[data-breakdown]").forEach((el) => {
-      const rows = S[el.dataset.breakdown] || [], max = Math.max(...rows.map((r) => r[1]));
-      el.innerHTML = rows.map(([n, c]) => `<div class="row"><span>${label[n] || n}</span><b>${c}</b><div class="track"><i style="width:${(c / max) * 100}%"></i></div></div>`).join("");
+      const raw = S[el.dataset.breakdown] || [];
+      const small = raw.filter((r) => r[1] < MIN).reduce((a, r) => a + r[1], 0);
+      const rows = raw.filter((r) => r[1] >= MIN);
+      if (small) { const o = rows.find((r) => r[0] === "Other"); if (o) o[1] += small; else rows.push(["Other", small]); }
+      const max = Math.max(...rows.map((r) => r[1]));
+      const otherName = el.dataset.breakdown === "sectors" ? "Other fields" : "Other";
+      el.innerHTML = rows.map(([n, c]) => `<div class="row"><span>${n === "Other" ? otherName : esc(label[n] || n)}</span><b>${c}</b><div class="track"><i style="width:${(c / max) * 100}%"></i></div></div>`).join("");
     });
     document.querySelectorAll("[data-routes]").forEach((el) => {
-      el.innerHTML = S.routes.map(([n, c]) => `<div style="width:${(c / S.members) * 100}%">${n} · ${Math.round((c / S.members) * 100)}%</div>`).join("");
+      // bar segments carry no text (a narrow segment would clip it); labels go in a key underneath
+      const pct = (c) => Math.round((c / S.members) * 100);
+      el.innerHTML = S.routes.map(([n, c]) => `<div style="width:${(c / S.members) * 100}%"></div>`).join("");
+      el.setAttribute("aria-hidden", "true");
+      el.insertAdjacentHTML("afterend", `<ul class="split-key">${S.routes.map(([n, c]) => `<li>${esc(n)} <b>${pct(c)}%</b></li>`).join("")}</ul>`);
     });
   }
 

@@ -3,11 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>About · Thistle Network</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<title>About · The Thistle Network</title>
+<meta name="description" content="Who runs The Thistle Network, what we aim to do, who's in the network, how employers can get involved, and answers to common questions.">
+<link rel="canonical" href="https://thistle.network/about.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Thistle Network">
+<meta property="og:title" content="About · The Thistle Network">
+<meta property="og:description" content="Who runs The Thistle Network, what we aim to do, who's in the network, how employers can get involved, and answers to common questions.">
+<meta property="og:url" content="https://thistle.network/about.html">
+<meta property="og:image" content="https://thistle.network/assets/og-image.png">
+<meta property="og:image:alt" content="The Thistle Network logo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f1e8f8">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script>try{var t=localStorage.getItem("tn:theme");if(t)document.documentElement.dataset.theme=JSON.parse(t)}catch(e){}</script>
+<link rel="preload" href="assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="site.css">
 <style>
   .aims { counter-reset: aim; display: grid; gap: 0; border-top: 1px solid var(--line); }
@@ -15,14 +27,8 @@
   .aim h3 { font-size: var(--s2); }
   .aim p { color: var(--muted); }
   @media (max-width: 700px) { .aim { grid-template-columns: 1fr; gap: 8px; } }
-  .team { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
-  .team .card { padding: 22px; }
-  .team h3 { font-size: var(--s1); }
-  @media (max-width: 860px) { .team { grid-template-columns: repeat(2, minmax(0,1fr)); } }
   .emblem-mark { width: 120px; }
 </style>
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body data-page="about">
 <main>
@@ -53,36 +59,24 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Who's in the network</span>
-        <h2><span data-stat="members">148</span> apprentices. <span data-stat="employers">65</span> employers. One group chat away.</h2>
+        <h2><span data-stat="members">163</span> apprentices, working at <span data-stat="employers">66</span> employers. One community.</h2>
         <p class="lede">A snapshot of everyone who has registered since <span data-stat="since">April 2026</span>.</p>
       </div>
       <div class="breakdown-grid">
         <div class="card"><span class="eyebrow">By sector</span><div class="bars" data-breakdown="sectors"></div></div>
         <div class="card"><span class="eyebrow">Where they're based</span><div class="bars green" data-breakdown="topPlaces"></div>
-          <p style="font-size:.9rem">Plus members in <span data-stat="places">17</span> towns and cities in total.</p></div>
+          <p style="font-size:.9rem">Plus members in <span data-stat="places">18</span> towns and cities in total.</p></div>
         <div class="card"><span class="eyebrow">Apprenticeship route</span>
-          <div class="big"><span data-stat="graduateShare">81</span>%</div>
+          <div class="big"><span data-stat="graduateShare">82</span>%</div>
           <p>are on a Graduate Apprenticeship, studying for a degree while they work.</p>
           <div class="split-bar" data-routes></div></div>
         <div class="card"><span class="eyebrow">Where they study</span><div class="bars" data-breakdown="topProviders"></div>
-          <p style="font-size:.9rem">Out of <span data-stat="providers">22</span> universities, colleges and training providers.</p></div>
+          <p style="font-size:.9rem">Out of <span data-stat="providers">23</span> universities, colleges and training providers.</p></div>
       </div>
-      <p style="margin-top:18px;color:var(--muted);font-size:.9rem">Updated automatically from our sign-up forms. Latest sign-up: <span data-stat="updated">22 October 2026</span>.</p>
+      <p style="margin-top:18px;color:var(--muted);font-size:.9rem">Updated automatically from our sign-up forms. Latest sign-up: <span data-stat="updated">11 November 2026</span>.</p>
     </div>
   </section>
 
-  <section class="band">
-    <div class="wrap">
-      <div class="section-head"><span class="eyebrow">The team</span><h2>Volunteers, plus mentors from Scottish industry.</h2><p class="lede">Everyone on the team is a current or recent apprentice, giving their time alongside their job.</p></div>
-      <div class="team">
-        <div class="card"><span class="step-num">EVENTS</span><h3>Plans the socials, trips and workshops</h3></div>
-        <div class="card"><span class="step-num">PARTNERSHIPS</span><h3>Works with employers, providers and public bodies</h3></div>
-        <div class="card"><span class="step-num">COMMUNICATIONS</span><h3>Runs our socials and tells apprentices what's on</h3></div>
-        <div class="card"><span class="step-num">COMMUNITY</span><h3>Approves members and looks after the groups</h3></div>
-      </div>
-      <p style="margin-top:22px;color:var(--muted)">Our <b style="color:var(--ink)">mentor pool</b> is made up of apprentices and professionals who give aspiring apprentices application feedback and mock interviews.</p>
-    </div>
-  </section>
 
   <section class="band" id="employers">
     <div class="wrap split">
@@ -90,10 +84,12 @@
         <span class="eyebrow">For employers</span>
         <h2 style="font-size:var(--s4)">Meet the next intake before they apply.</h2>
         <p class="lede">Support Scotland's apprentices and get your name in front of motivated young people.</p>
+        <div><a class="btn btn-primary" href="mailto:general@thistle.network?subject=Partnering%20with%20Thistle%20Network">Partner with us</a></div>
       </div>
       <div class="grid">
         <div class="card"><h3>Host an insight day</h3><p>Open your doors to aspiring apprentices for a day. We bring the group and handle sign-ups.</p></div>
-        <div class="card"><h3>Sponsor an event</h3><p>Back a social, a trip or a workshop series, and help keep events free for apprentices.</p></div>
+        <div class="card"><h3>Sponsor an event</h3><p>Back a social, a trip or a workshop series, and help keep costs down for apprentices.</p></div>
+        <div class="card"><h3>Partner on sessions</h3><p>We're planning webinars, workshops and mock interviews for aspiring apprentices, and looking for partners to run them with us.</p></div>
         <div class="card"><h3>Take a stall</h3><p>Meet apprentices and applicants face to face at our larger events.</p></div>
       </div>
     </div>
@@ -103,12 +99,12 @@
     <div class="wrap split">
       <div class="stack"><span class="eyebrow">Questions</span><h2 style="font-size:var(--s4)">Good to know</h2></div>
       <div class="faq">
-        <details open><summary>Who can join?</summary><p>Any current or aspiring apprentice in Scotland: Foundation, Modern or Graduate, in any sector.</p></details>
-        <details><summary>Is it free?</summary><p>Yes, joining is free. Some events have a small ticket fee to cover costs, and we'll always tell you up front.</p></details>
-        <details><summary>Why can't I join the WhatsApp directly?</summary><p>We match you to groups for your sector and area, and we check every registration to keep the groups safe and apprentice-only.</p></details>
+        <details open><summary>Who can join?</summary><p>Current apprentices: anyone on a Modern or Graduate Apprenticeship in Scotland, aged 16 or over. Aspiring apprentices: anyone thinking about an apprenticeship.</p></details>
+        <details><summary>Is it free?</summary><p>Yes, joining is free, but some activities have a ticket cost.</p></details>
+        <details><summary>Why can't I join the WhatsApp directly?</summary><p>We check every registration to keep the community safe and apprentice-only.</p></details>
         <details><summary>How long does approval take?</summary><p>Our volunteers review registrations in their spare time, so it can take a few days. If it's been more than a week, email us.</p></details>
-        <details><summary>I'm still at school. Is this for me?</summary><p>Yes. The aspiring path is built for you, with insight days, mentoring and mock interviews.</p></details>
-        <details><summary>How can employers get involved?</summary><p>Host an insight day, sponsor an event or take a stall. Email us and we'll set up a call.</p></details>
+        <details><summary>I'm still at school. Is this for me?</summary><p>Yes. The aspiring path is built for you.</p></details>
+        <details><summary>How can employers get involved?</summary><p>Help us host an insight day, sponsor an event, take a stall, or partner with us on webinars, workshops and mock interviews for aspiring apprentices. Email us.</p></details>
       </div>
     </div>
   </section>
