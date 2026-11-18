@@ -157,7 +157,7 @@ p { margin: 0; }
 .path-current { background: var(--green-soft); color: var(--green); }
 .path p { color: var(--ink); opacity: .8; }
 
-.pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; font: 500 0.75rem/1 var(--f-mono); }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; font: 600 0.875rem/1.1 var(--f-mono); }
 .pill-aspiring { background: var(--purple-soft); color: var(--purple-text); }
 .pill-current { background: var(--green-soft); color: var(--green); }
 .pill-plain { background: transparent; border: 1px solid var(--line); color: var(--muted); }
