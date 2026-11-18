@@ -68,9 +68,9 @@
   <section class="band">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Plan the next one</span>
+        <span class="eyebrow">Ideas for the next one</span>
         <h2>What would get you out the door?</h2>
-        <p class="lede">Got an idea for the next one? Pick your favourites, copy them and send them our way.</p>
+        <p class="lede">These are ideas, not booked events. Pick your favourites, copy them and send them our way, or suggest your own.</p>
       </div>
       <div class="tiles" id="tiles"></div>
       <div class="toolbar" style="margin-top:20px;margin-bottom:0">
@@ -123,13 +123,12 @@
 <script>
   // adventures
   const adventures = [
-    ["Food, games & grub", "A relaxed night to meet your group"],
-    ["Go-karting", "Already in planning"],
-    ["Hiking", "A day in the hills, all levels"],
-    ["A lodge up north", "A weekend away in the Highlands"],
-    ["Top Golf", "No golf skills needed"],
-    ["Cinema night", "Film, then food after"],
-    ["Laser tag", "Sector vs sector"]
+    ["Food, games & grub", "A relaxed night out"],
+    ["Go-karting", "Out on the track"],
+    ["Hiking", "A day in the hills"],
+    ["A lodge up north", "A weekend away"],
+    ["Cinema night", "A film, then food"],
+    ["Laser tag", "Team against team"]
   ];
   const picks = new Set(TN.store.get("picks", []));
   const tiles = document.getElementById("tiles");

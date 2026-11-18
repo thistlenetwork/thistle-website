@@ -11,7 +11,7 @@ The site for [thistle.network](https://thistle.network): plain HTML, CSS and Jav
 | `site.js` | The menu and footer shared by every page, and the code that fills in the numbers and events. |
 | `site.css` | All the styles, with the light and dark colours at the top. |
 | `assets/` | The logos. |
-| `privacy.html` | The privacy policy (from the previous site, with its own `privacy.css`, `privacy.js` and images). |
+| `privacy.html` | The privacy notice. Update the date at the top whenever it changes. |
 
 Edit a file on GitHub, commit to `main`, and the site updates in about a minute.
 

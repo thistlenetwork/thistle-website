@@ -1,313 +1,249 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Notice — The Thistle Network</title>
-    <logo />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet">
-<link rel="stylesheet" href="privacy.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy notice · The Thistle Network</title>
+<meta name="description" content="How The Thistle Network collects, uses and protects your personal information, and the choices you have.">
+<link rel="canonical" href="https://thistle.network/privacy.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Thistle Network">
+<meta property="og:title" content="Privacy notice · The Thistle Network">
+<meta property="og:description" content="How The Thistle Network collects, uses and protects your personal information, and the choices you have.">
+<meta property="og:url" content="https://thistle.network/privacy.html">
+<meta property="og:image" content="https://thistle.network/assets/og-image.png">
+<meta property="og:image:alt" content="The Thistle Network logo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f1e8f8">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script>try{var t=localStorage.getItem("tn:theme");if(t)document.documentElement.dataset.theme=JSON.parse(t)}catch(e){}</script>
+<link rel="preload" href="assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="site.css">
+<style>
+  .policy { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 48px; align-items: start; }
+  .toc { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 10px; font-size: .92rem; }
+  .toc a { color: var(--muted); text-decoration: none; }
+  .toc a:hover { color: var(--ink); }
+  .prose { max-width: 68ch; }
+  .prose section { padding: 0 0 34px; margin-bottom: 34px; border-bottom: 1px solid var(--line); scroll-margin-top: 96px; }
+  .prose section:last-child { border-bottom: 0; }
+  .prose h2 { font-size: var(--s3); margin-bottom: 14px; }
+  .prose h3 { font-size: var(--s1); margin: 22px 0 6px; }
+  .prose p, .prose li { color: var(--muted); line-height: 1.65; }
+  .prose p + p { margin-top: 12px; }
+  .prose ul { padding-left: 20px; margin: 12px 0; display: grid; gap: 8px; }
+  .prose b { color: var(--ink); }
+  .prose a { color: var(--green); }
+  .basis { font-size: .92rem; margin-top: 6px; }
+  .basis b { font: 700 var(--s0)/1.3 var(--f-body); color: var(--green); margin-right: 6px; }
+  .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .95rem; }
+  .data-table th, .data-table td { text-align: left; vertical-align: top; padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line); }
+  .data-table th { font: 700 .95rem/1.3 var(--f-body); color: var(--green); }
+  .data-table td { color: var(--muted); }
+  .data-table td:first-child { color: var(--ink); font-weight: 600; width: 34%; }
+  .summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .summary .card h3 { font-size: var(--s1); }
+  .summary .card p { color: var(--muted); }
+  @media (max-width: 860px) {
+    .policy { grid-template-columns: 1fr; gap: 24px; }
+    .toc { position: static; flex-direction: row; flex-wrap: wrap; gap: 8px 16px; }
+    .summary { grid-template-columns: 1fr; }
+    .data-table, .data-table tbody, .data-table tr, .data-table td { display: block; width: 100%; }
+    .data-table thead { display: none; }
+    .data-table tr { padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .data-table td { border: 0; padding: 4px 0; }
+    .data-table td:first-child { width: 100%; }
+  }
+</style>
 </head>
+<body data-page="privacy">
+<main>
+  <section class="hero compact">
+    <div class="wrap">
+      <div class="stack rise">
+        <span class="eyebrow">Legal</span>
+        <h1>Privacy notice<span class="green">.</span></h1>
+        <p class="lede">How The Thistle Network collects, uses and looks after your personal information, and the choices you have.</p>
+        <p style="color:var(--muted);font-size:.9rem">Last updated 18 November 2026</p>
+      </div>
+      <img class="hero-emblem logo-l" src="assets/emblem-light.png" alt=""><img class="hero-emblem logo-d" src="assets/emblem-dark.png" alt="">
+    </div>
+  </section>
 
-<body>
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">The short version</span><h2>Three things to know.</h2></div>
+      <div class="summary">
+        <div class="card"><h3>We only use it to run the network</h3><p>Your details are used to check you're an apprentice or hoping to become one, add you to our WhatsApp community, run events and answer you. We never sell them.</p></div>
+        <div class="card"><h3>We publish totals, never people</h3><p>The numbers on this site, like how many members we have or which employers they work at, are counts. No one is named.</p></div>
+        <div class="card"><h3>You're in control</h3><p>Email <b>general@thistle.network</b> to see, correct or delete your details, or to leave the network.</p></div>
+      </div>
+    </div>
+  </section>
 
-    <header id="siteHeader">
-        <nav class="wrap">
-            <!-- Brand (unchanged) -->
-            <a href="index.html" class="brand">
-                <img src="index_svg_2.svg" alt="The Thistle's Network logo" class="brand-mark" />
-                <span class="brand-text"><span class="c-purple">Thistle</span> <span class="c-green">Network</span></span>
-            </a>
+  <section class="band">
+    <div class="wrap policy">
+      <nav class="toc" aria-label="On this page">
+        <a href="#who">Who we are</a>
+        <a href="#covers">What this notice covers</a>
+        <a href="#collect">Information we collect</a>
+        <a href="#use">How we use it</a>
+        <a href="#share">Who we share it with</a>
+        <a href="#whatsapp">WhatsApp</a>
+        <a href="#website">This website</a>
+        <a href="#transfers">Outside the UK</a>
+        <a href="#keep">How long we keep it</a>
+        <a href="#young">Under 18s</a>
+        <a href="#rights">Your rights</a>
+        <a href="#changes">Changes to this notice</a>
+        <a href="#contact">Contact and complaints</a>
+      </nav>
 
-            <!-- Right side: mobile CTA + hamburger + overlay menu -->
-            <div class="nav-wrapper">
-                <!-- Mobile-only CTA (visible on small screens) -->
-                <div class="nav-cta nav-cta-mobile">
-                <a href="index.html#audience" class="btn btn-primary btn-sm">Register</a>
-                </div>
-
-                <!-- Hamburger button -->
-                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-                </button>
-
-                <!-- Overlay menu (contains nav links + desktop CTA) -->
-                <div class="nav-menu" id="navMenu">
-                <ul class="nav-links">
-                    <li><a href="index.html#audience">Who it's for</a></li>
-                    <li><a href="index.html#aims">Our aims</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                </ul>
-                <div class="nav-cta nav-cta-desktop">
-                    <a href="index.html#audience" class="btn btn-primary">Register to join</a>
-                </div>
-                </div>
-            </div>
-            </nav>
-    </header>
-
-    <main id="top">
-
-        <!-- ============ PAGE HERO ============ -->
-        <section class="page-hero">
-            <div class="wrap">
-                <p class="eyebrow">Legal</p>
-                <h1>Privacy Notice</h1>
-                <p>How The Thistle Network collects, uses, and protects your personal information — and the choices
-                    you have.</p>
-                <span class="last-updated">Last updated: 30/08/2026</span>
-            </div>
+      <div class="prose">
+        <section id="who">
+          <h2>Who we are</h2>
+          <p>The Thistle Network ("we", "us") is a volunteer-run community for current and aspiring apprentices in Scotland. We decide how the personal information in this notice is used, which makes us its data controller under UK GDPR and the Data Protection Act 2018.</p>
+          <p>Email: <b>general@thistle.network</b></p>
         </section>
 
-        <!-- ============ PRIVACY CONTENT ============ -->
-        <section class="privacy-content">
-            <div class="wrap privacy-inner">
-
-                <!-- Table of Contents -->
-                <div class="privacy-toc reveal">
-                    <h3>On this page</h3>
-                    <ul>
-                        <li><a href="#who-we-are">Who we are</a></li>
-                        <li><a href="#what-this-covers">What this notice covers</a></li>
-                        <li><a href="#information-we-collect">Information we collect</a></li>
-                        <li><a href="#how-we-use">How we use your information</a></li>
-                        <li><a href="#who-we-share">Who we share information with</a></li>
-                        <li><a href="#international">International transfers</a></li>
-                        <li><a href="#retention">How long we keep information</a></li>
-                        <li><a href="#your-rights">Your rights</a></li>
-                        <li><a href="#changes">Changes to this notice</a></li>
-                        <li><a href="#contact-us">Contact us</a></li>
-                    </ul>
-                </div>
-
-                <!-- Who we are -->
-                <div class="privacy-section reveal" id="who-we-are">
-                    <h2>Who we are</h2>
-                    <p>The Thistle Network ("we", "us") is the data controller for personal information described in
-                        this notice.</p>
-                    <div class="privacy-contact-box">
-                        <p><strong>Email:</strong> <a
-                                href="mailto:general@thistle.network">general@thistle.network</a></p>
-                    </div>
-                </div>
-
-                <hr class="privacy-divider">
-
-                <!-- What this notice covers -->
-                <div class="privacy-section reveal" id="what-this-covers">
-                    <h2>What this notice covers</h2>
-                    <p>This notice explains how we collect and use personal information when you:</p>
-                    <ul>
-                        <li>Visit our website or contact us</li>
-                        <li>Receive an invitation to one of our events</li>
-                        <li>Register for and attend an event</li>
-                        <li>Sign up to our network or mailing list</li>
-                        <li>Partner or collaborate with us</li>
-                    </ul>
-                </div>
-
-                <hr class="privacy-divider">
-
-                <!-- Information we collect -->
-                <div class="privacy-section reveal" id="information-we-collect">
-                    <h2>Information we collect</h2>
-                    <p><strong>From you directly:</strong> name, job title, organisation, work email, phone number (if
-                        provided), dietary and accessibility requirements, and any information you include in messages
-                        to us.</p>
-                    <p><strong>From publicly available business sources:</strong> corporate contact details we use to
-                        invite employers to relevant events, sourced from professional networks, corporate websites, and
-                        our existing employer relationships.</p>
-                    <p><strong>Automatically:</strong> limited technical information when you visit our website.</p>
-                </div>
-
-                <hr class="privacy-divider">
-
-                <!-- How we use your information -->
-                <div class="privacy-section reveal" id="how-we-use">
-                    <h2>How we use your information and our lawful basis</h2>
-
-                    <h3>Inviting employers to events</h3>
-                    <p>We use business contact details to invite organisations to events relevant to their work.
-                        <em>Lawful basis: legitimate interests</em> in connecting our network with employers active in
-                        early careers and Scottish apprenticeships.
-                    </p>
-
-                    <h3>Managing event registration and attendance</h3>
-                    <p>Once you confirm attendance, we use your details to register you, communicate logistics, and
-                        cater appropriately. <em>Lawful basis: legitimate interests</em> in running the event you've
-                        agreed to attend. Dietary and accessibility information that reveals health or religious data is
-                        processed on the basis of your <em>explicit consent</em> (given when you submit the registration
-                        form).</p>
-
-                    <h3>Sharing delegate lists with event co-hosts</h3>
-                    <p>Where an event is co-hosted, we share a delegate list with the co-host after the event (typically
-                        name, job title, organisation, and work email). The co-host acts as an independent controller.
-                        <em>Lawful basis: legitimate interests</em> in supporting joint event partners. We tell you who
-                        the co-host is and link to their privacy notice at the point of registration, and you can object
-                        before the list is shared.
-                    </p>
-
-                    <h3>Network updates and marketing</h3>
-                    <p>If you've subscribed to our updates, we send occasional emails about events and the network.
-                        <em>Lawful basis: consent</em> — you can unsubscribe at any time using the link in any email.
-                    </p>
-
-                    <h3>Responding to enquiries and managing partnerships</h3>
-                    <p><em>Lawful basis: legitimate interests</em> in operating the network and responding to those who
-                        contact us.</p>
-
-                    <h3>Legal and compliance obligations</h3>
-                    <p>Where we need to comply with the law. <em>Lawful basis: legal obligation.</em></p>
-                </div>
-
-                <hr class="privacy-divider">
-
-                <!-- Who we share information with -->
-                <div class="privacy-section reveal" id="who-we-share">
-                    <h2>Who we share information with</h2>
-                    <ul>
-                        <li><strong>Service providers acting as our processors</strong> — for example our form and email
-                            providers, and storage providers. They process data only on our instructions and under
-                            contract.</li>
-                        <li><strong>Event co-hosts and partners</strong> — for joint events, as described above. These
-                            act as independent controllers.</li>
-                        <li><strong>Authorities or advisers</strong> — where required by law or to protect our legal
-                            rights.</li>
-                    </ul>
-                    <p>We do not sell personal information.</p>
-                </div>
-
-                <hr class="privacy-divider">
-
-                <!-- International transfers -->
-                <div class="privacy-section reveal" id="international">
-                    <h2>International transfers</h2>
-                    <p>We aim to keep personal data within the UK and EU. Where any provider processes data outside this
-                        region, we put appropriate safeguards in place (such as the UK International Data Transfer
-                        Agreement or EU Standard Contractual Clauses).</p>
-                </div>
-
-                <hr class="privacy-divider">
-
-                <!-- How long we keep information -->
-                <div class="privacy-section reveal" id="retention">
-                    <h2>How long we keep information</h2>
-                    <ul>
-                        <li><strong>Event registration data:</strong> 12 months after the event</li>
-                        <li><strong>Email correspondence:</strong> up to 3 years from last contact</li>
-                        <li><strong>Mailing list subscriptions:</strong> until you unsubscribe</li>
-                        <li><strong>Partnership and contractual records:</strong> 7 years (for legal and accounting
-                            reasons)</li>
-                    </ul>
-                </div>
-
-                <hr class="privacy-divider">
-
-                <!-- Your rights -->
-                <div class="privacy-section reveal" id="your-rights">
-                    <h2>Your rights</h2>
-                    <p>Under UK GDPR you have the right to:</p>
-                    <ul>
-                        <li>Access the personal information we hold about you</li>
-                        <li>Have inaccurate information corrected</li>
-                        <li>Have your information deleted in certain circumstances</li>
-                        <li>Restrict or object to our processing</li>
-                        <li>Receive your information in a portable format</li>
-                        <li>Withdraw consent where processing is based on consent</li>
-                    </ul>
-                    <p>To exercise any right, email <a href="mailto:general@thistle.network"
-                            style="color:var(--fern-deep); font-weight:600; border-bottom:1px solid rgba(31,91,57,0.3); padding-bottom:1px;">general@thistle.network</a>.
-                        We'll respond within one month.</p>
-                </div>
-
-                <hr class="privacy-divider">
-
-                <!-- Changes to this notice -->
-                <div class="privacy-section reveal" id="changes">
-                    <h2>Changes to this notice</h2>
-                    <p>We may update this notice from time to time. The "last updated" date at the top shows when it was
-                        last changed. Material changes will be communicated where appropriate.</p>
-                </div>
-
-                <hr class="privacy-divider">
-
-                <!-- Contact us -->
-                <div class="privacy-section reveal" id="contact-us">
-                    <h2>Contact us</h2>
-                    <p>Questions about this notice or how we handle your information? Email <a
-                            href="mailto:general@thistle.network"
-                            style="color:var(--fern-deep); font-weight:600; border-bottom:1px solid rgba(31,91,57,0.3); padding-bottom:1px;">general@thistle.network</a>.
-                    </p>
-                </div>
-
-            </div>
+        <section id="covers">
+          <h2>What this notice covers</h2>
+          <p>This notice explains how we collect and use personal information when you:</p>
+          <ul>
+            <li>register to join as a current or aspiring apprentice</li>
+            <li>join our WhatsApp community or groups</li>
+            <li>sign up for, pay for or come to one of our events</li>
+            <li>contact us, or partner or work with us as an employer or organisation</li>
+            <li>visit this website</li>
+          </ul>
         </section>
 
-    </main>
+        <section id="collect">
+          <h2>Information we collect</h2>
+          <h3>From you directly</h3>
+          <table class="data-table">
+            <thead><tr><th>When</th><th>What</th></tr></thead>
+            <tbody>
+              <tr><td>You register as a current apprentice</td><td>Your full name, age range, town or city, email address, phone number, employer, apprenticeship role, apprenticeship type, year of your apprenticeship, learning provider, what you're joining for, how you heard about us, and that you agree to our community guidelines.</td></tr>
+              <tr><td>You register as an aspiring apprentice</td><td>Your full name, age range, town or city, email address, phone number, whether you're at school or college (and your year, if you're at school), the type of apprenticeship and the area or industry you're interested in, what you're joining for, how you heard about us, and that you agree to our community guidelines.</td></tr>
+              <tr><td>You sign up for an event</td><td>Your name and email address. For paid events, a screenshot of your payment so we can confirm your place. Whether you're happy for photos and videos to be taken of you.</td></tr>
+              <tr><td>You come to an event</td><td>Whether you came, so we can count attendance.</td></tr>
+              <tr><td>You give feedback after an event</td><td>Your answers. Adding your name is optional.</td></tr>
+              <tr><td>You contact us or partner with us</td><td>Your contact details and anything you include in your messages.</td></tr>
+            </tbody>
+          </table>
+          <h3>From other places</h3>
+          <p>To invite employers and organisations to work with us, we use business contact details from professional networks such as LinkedIn and from company websites.</p>
+          <h3>Automatically</h3>
+          <p>Limited technical information, such as your IP address, which our website host receives when your browser loads a page. See <a href="#website">This website</a>.</p>
+        </section>
 
-    <footer>
+        <section id="use">
+          <h2>How we use it, and our lawful basis</h2>
+          <h3>Checking who joins</h3>
+          <p>A volunteer checks each registration against each request to join our WhatsApp community or groups, so they stay safe and apprentice-only.</p>
+          <p class="basis"><b>Lawful basis</b>Consent, given when you submit the registration form, and our legitimate interests in running a safe community.</p>
+          <h3>Running the community</h3>
+          <p>We add you to our WhatsApp community or groups and share events and opportunities there.</p>
+          <p class="basis"><b>Lawful basis</b>Consent.</p>
+          <h3>Running events</h3>
+          <p>We use your sign-up to confirm your place, check payments for paid events, contact you about the event and count who came. If you agree on the sign-up form, photos and videos taken at the event may be shared on our social media.</p>
+          <p class="basis"><b>Lawful basis</b>Legitimate interests in running the event you've signed up for. Consent for photos and videos.</p>
+          <h3>Contacting us about an event or by email</h3>
+          <p>Your email address may be used to contact you about community events and updates. We don't send newsletters. If we start, we'll ask first and every email will let you unsubscribe.</p>
+          <p class="basis"><b>Lawful basis</b>Legitimate interests in keeping members informed.</p>
+          <h3>Showing how the network is doing</h3>
+          <p>We turn registrations into totals, such as the number of members, employers, towns, learning providers and sectors, and show them on this website. Small groups are counted together so no one can be picked out.</p>
+          <p class="basis"><b>Lawful basis</b>Legitimate interests in showing how the network is growing.</p>
+          <h3>Working with employers and partners</h3>
+          <p>We contact organisations about events and partnerships, and reply to anyone who gets in touch.</p>
+          <p class="basis"><b>Lawful basis</b>Legitimate interests in connecting apprentices with employers and partners.</p>
+          <h3>Legal obligations</h3>
+          <p class="basis"><b>Lawful basis</b>Legal obligation, where the law requires us to keep or share information.</p>
+        </section>
 
-        <div class="wrap foot-main">
-            <div class="foot-col">
-                <div class="foot-brand">
-                    <img src="privacy_svg_1.svg"
-                        alt="The Thistle Network logo" class="brand-mark">
-                    <span class="brand-text"><span class="c-purple">Thistle</span> <span
-                            class="c-green">Network</span></span>
-                </div>
-                <p class="foot-desc">A community-led network for current and aspiring apprentices across Scotland.</p>
-                <div class="foot-social">
-                    <a href="mailto:general@thistle.network" aria-label="Email"><svg viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="1.6">
-                            <path d="M4 4h16v12H7l-3 3V4Z" />
-                        </svg></a>
-                    <a href="https://uk.linkedin.com/company/thistlenetwork" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.96 3.77-1.96 4.03 0 4.78 2.5 4.78 5.75V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.45-2.16 2.96V21H9z" />
-                        </svg></a>
-                    <a href="https://www.instagram.com/thistlenetwork/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.6">
-                            <rect x="3" y="3" width="18" height="18" rx="5" />
-                            <circle cx="12" cy="12" r="4" />
-                            <circle cx="17.5" cy="6.5" r="1" />
-                        </svg></a>
-                </div>
-            </div>
-            <div class="foot-col">
-                <h5>Network</h5>
-                <ul>
-                    <li><a href="index.html#audience">Aspiring apprentices</a></li>
-                    <li><a href="index.html#audience">Current apprentices</a></li>
-                    <li><a href="index.html#aims">Our aims</a></li>
-                    <li><a href="index.html#about">About the committee</a></li>
-                </ul>
-            </div>
-            <div class="foot-col">
-                <h5>Get involved</h5>
-                <ul>
-                    <li><a href="index.html#audience">Register to join</a></li>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="index.html#contact">Contact us</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="wrap foot-bottom">
-            <span>© 2026 The Thistle Network. All rights reserved.</span>
-            <span>Made by apprentices, for apprentices — Scotland.</span>
-        </div>
-    </footer>
+        <section id="share">
+          <h2>Who we share it with</h2>
+          <ul>
+            <li><b>Thistle volunteers</b> who check registrations, run events and look after the community.</li>
+            <li><b>Service providers</b> who store information for us. Our sign-up and event forms are built on <a href="https://zite.com" rel="noopener">Zite</a>, which stores your answers.</li>
+            <li><b>Event co-hosts.</b> If we run an event with another organisation, we may need to share the attendee list with them, depending on our agreement. If so, the event's sign-up form will say who they are before you register.</li>
+            <li><b>Authorities or advisers</b>, where the law requires it or to protect someone's safety.</li>
+          </ul>
+          <p>We do not sell personal information.</p>
+        </section>
 
-    <script src="privacy.js"></script>
+        <section id="whatsapp">
+          <h2>WhatsApp</h2>
+          <p>Our community runs on WhatsApp, which is owned by Meta. When you join a group, other members of that group can see your name and phone number. WhatsApp handles your information under <a href="https://www.whatsapp.com/legal/privacy-policy-eea" rel="noopener">its own privacy policy</a>, not ours.</p>
+          <p>Group admins can remove anyone who breaks the group rules. You can leave at any time from WhatsApp.</p>
+        </section>
 
+        <section id="website">
+          <h2>This website</h2>
+          <ul>
+            <li><b>No tracking or advertising cookies.</b> We don't use analytics or advertising tools on this site.</li>
+            <li><b>Saved on your device only.</b> Some features remember your choices in your own browser: the colour theme, your readiness checklist, your quiz answer, your event picks and the salary you entered in the take-home calculator. This stays on your device, we never see it, and clearing your browser data removes it.</li>
+            <li><b>Fonts.</b> Our fonts are stored on this site, so loading a page doesn't send your details to a font service.</li>
+            <li><b>Links to other sites.</b> Our sign-up links go to Zite, and our social links go to LinkedIn, Instagram and TikTok. Those sites have their own privacy policies.</li>
+          </ul>
+        </section>
+
+        <section id="transfers">
+          <h2>Outside the UK</h2>
+          <p>Some of the services we use, including WhatsApp, Zite and our website host, may store or process information outside the UK. Where they do, we rely on the safeguards those providers put in place under UK data protection law.</p>
+        </section>
+
+        <section id="keep">
+          <h2>How long we keep it</h2>
+          <table class="data-table">
+            <thead><tr><th>Information</th><th>How long</th></tr></thead>
+            <tbody>
+              <tr><td>Your registration</td><td>While you're a member. Deleted within 3 months of you leaving (see below).</td></tr>
+              <tr><td>Registrations that aren't approved</td><td>Deleted within 3 months.</td></tr>
+              <tr><td>Event sign-ups and proof of payment</td><td>Deleted within 3 months of the event. We keep only totals, such as how many people came.</td></tr>
+              <tr><td>Emails and messages</td><td>Up to 2 years from the last contact.</td></tr>
+            </tbody>
+          </table>
+          <p>You've left the network when you leave our WhatsApp community, when we remove you, or when you ask us to delete your details. If you ask us to delete them, we'll do it within one month.</p>
+        </section>
+
+        <section id="young">
+          <h2>Under 18s</h2>
+          <p>Our aspiring community is open to school pupils, so some members are under 18. We're reviewing how we look after younger members and will update this notice when that's done. If you're a parent or carer with a question, email <b>general@thistle.network</b>.</p>
+        </section>
+
+        <section id="rights">
+          <h2>Your rights</h2>
+          <p>Under UK GDPR you have the right to:</p>
+          <ul>
+            <li>see the personal information we hold about you</li>
+            <li>have wrong information corrected</li>
+            <li>have your information deleted in certain circumstances</li>
+            <li>restrict or object to how we use it</li>
+            <li>get your information in a portable format</li>
+            <li>withdraw consent where we rely on it</li>
+          </ul>
+          <p>To use any of these, email <b>general@thistle.network</b>. We'll reply within one month, free of charge.</p>
+        </section>
+
+        <section id="changes">
+          <h2>Changes to this notice</h2>
+          <p>We may update this notice. The date at the top shows when it last changed. If we make a big change, we'll let members know.</p>
+        </section>
+
+        <section id="contact">
+          <h2>Contact and complaints</h2>
+          <p>Questions about this notice or how we handle your information? Email <b>general@thistle.network</b>.</p>
+          <p>If you're unhappy with how we've handled your information, you can complain to the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk/make-a-complaint/" rel="noopener">ico.org.uk/make-a-complaint</a> or on 0303 123 1113. We'd appreciate the chance to put it right first.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="stats.js"></script>
+<script src="site.js"></script>
 </body>
-
 </html>
