@@ -153,9 +153,9 @@
   const forAudience = (events, who) => !who || who === "all" ? events : events.filter((e) => audienceOf(e) === who || audienceOf(e) === "all");
   const signUpFor = (e) => e.cta || (audienceOf(e) === "aspiring" ? FORMS.aspiring : FORMS.current);
 
-  // time, venue, cost and ages, shown when events.json has them
+  // time, venue and ages, shown when events.json has them (costs are never shown)
   const facts = (e) => {
-    const f = [e.time && `Time: ${esc(e.time)}`, e.venue && `Venue: ${esc(e.venue)}`, e.cost && `Cost: ${esc(e.cost)}`, e.ages && `Ages: ${esc(e.ages)}`].filter(Boolean);
+    const f = [e.time && `Time: ${esc(e.time)}`, e.venue && `Venue: ${esc(e.venue)}`, e.ages && `Ages: ${esc(e.ages)}`].filter(Boolean);
     return f.length ? `<div class="facts">${f.map((x) => `<span>${x}</span>`).join("")}</div>` : "";
   };
 

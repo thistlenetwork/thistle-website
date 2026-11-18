@@ -1,8 +1,8 @@
 {
   "updated": "2026-11-18",
-  "audiences": "Set \"for\" to \"current\", \"aspiring\" or \"all\" (missing means current). For upcoming events also add \"time\", \"venue\", \"cost\" and \"ages\" (e.g. \"18+\" or \"All ages\"), and \"cta\" for an event-specific sign-up link. Add \"spacesFrom\" (a Zite form's /api/getCapacity address) to show spaces left; the deploy fills it in every hour.",
+  "audiences": "Set \"for\" to \"current\", \"aspiring\" or \"all\" (missing means current). For upcoming events also add \"time\", \"venue\" and \"ages\" (e.g. \"18+\" or \"All ages\"), and \"cta\" for an event-specific sign-up link. Add \"spacesFrom\" (a Zite form's /api/getCapacity address) to show spaces left; the deploy fills it in every hour.",
   "events": [
-    {"id": "topgolf", "title": "Top Golf", "for": "current", "place": "Glasgow", "date": "2026-11-24", "time": "6pm", "venue": "Top Golf Glasgow", "cost": "£9.99", "blurb": "An evening at Top Golf Glasgow.", "cta": "https://topgolf.zite.so", "spacesFrom": "https://topgolf.zite.so/api/getCapacity"},
+    {"id": "topgolf", "title": "Top Golf", "for": "current", "place": "Glasgow", "date": "2026-11-24", "time": "6pm", "venue": "Top Golf Glasgow", "blurb": "An evening at Top Golf Glasgow.", "cta": "https://topgolf.zite.so", "spacesFrom": "https://topgolf.zite.so/api/getCapacity"},
     {"id": "flip-out", "title": "Flip Out plus food", "for": "current", "place": "Glasgow", "date": "2026-10-03", "attended": 29, "blurb": "Trampolines at Flip Out, then food."},
     {"id": "run-club", "title": "Run Club", "for": "current", "place": "Glasgow", "date": "2026-09-21", "attended": 6, "blurb": "A group run."},
     {"id": "fat-hippo", "title": "Fat Hippo", "for": "current", "place": "Edinburgh", "date": "2026-09-19", "attended": 7, "blurb": "Burgers at Fat Hippo."},
