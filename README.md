@@ -2,6 +2,15 @@
 
 The site for [thistle.network](https://thistle.network): plain HTML, CSS and JavaScript, hosted free on GitHub Pages. There is nothing to build or install.
 
+## How changes go live
+
+1. **Make changes on the `beta` branch**, never straight on `main`.
+2. **Check them on the preview:** https://thistle-beta.pages.dev. Cloudflare Pages rebuilds it from `beta` about a minute after every push. Search engines are told not to list it.
+3. **Ashraf and Zie both check the preview** before anything goes live.
+4. **Run the pre-launch check** on the final version (accessibility, links, phone layout, spelling, and anything the site says that might not be true).
+5. **Merge `beta` into `main`** with a pull request once you're both happy: https://github.com/thistlenetwork/thistle-website/compare/main...beta
+6. **GitHub publishes `main` to thistle.network** in about a minute (see "Live member numbers" below for what else that run does).
+
 ## Editing the site
 
 | File | What it holds |
