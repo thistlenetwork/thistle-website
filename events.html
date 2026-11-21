@@ -102,6 +102,37 @@
     }
     render();
 
+    // Event details for Google (schema.org), so upcoming dated events can show in Google's event listings
+    const toIsoStart = (e) => {
+      const m = /^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?$/i.exec((e.time || "").trim());
+      if (!m) return e.date;
+      let h = +m[1] % 12; if ((m[3] || "").toLowerCase() === "pm") h += 12; if (!m[3] && +m[1] === 12) h = 12;
+      const hm = `${String(h).padStart(2, "0")}:${m[2] || "00"}`;
+      const probe = new Date(`${e.date}T12:00:00Z`);
+      const zone = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", timeZoneName: "shortOffset" }).formatToParts(probe).find((x) => x.type === "timeZoneName")?.value || "GMT";
+      const off = zone === "GMT" ? "+00:00" : zone.replace("GMT", "").replace(/^([+-])(\d)$/, "$10$2:00").replace(/^([+-]\d{2})$/, "$1:00");
+      return `${e.date}T${hm}:00${off}`;
+    };
+    const dated = upcoming.filter((e) => e.date);
+    if (dated.length) {
+      const ld = document.createElement("script");
+      ld.type = "application/ld+json";
+      ld.textContent = JSON.stringify(dated.map((e) => ({
+        "@context": "https://schema.org",
+        "@type": "Event",
+        name: e.title,
+        description: e.blurb || undefined,
+        startDate: toIsoStart(e),
+        eventStatus: "https://schema.org/EventScheduled",
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        location: { "@type": "Place", name: e.venue || e.place, address: { "@type": "PostalAddress", addressLocality: e.place, addressRegion: "Scotland", addressCountry: "GB" } },
+        organizer: { "@type": "Organization", name: "The Thistle Network", url: "https://thistle.network/" },
+        url: "https://thistle.network/events.html",
+        image: "https://thistle.network/assets/og-image.png"
+      })));
+      document.head.append(ld);
+    }
+
     const t = TN.eventTotals(events);
     const first = t.past.slice().sort((a, b) => TN.parseDate(a.date) - TN.parseDate(b.date))[0];
     const fill = { came: t.came, count: t.past.length, since: first ? TN.parseDate(first.date).toLocaleDateString("en-GB", { month: "long", year: "numeric" }) : "" };

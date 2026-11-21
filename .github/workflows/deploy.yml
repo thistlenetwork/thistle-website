@@ -26,10 +26,10 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.first_try.outputs.page_url || steps.second_try.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
       - name: Refresh member numbers
@@ -40,9 +40,18 @@ jobs:
         run: node .github/scripts/update-spaces.mjs
       - name: Collect the site files (leaves out the README, scripts and workflows)
         run: rsync -a --exclude '.git*' --exclude '.github' --exclude 'README.md' --exclude '_site' ./ _site/
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
-      - id: deployment
+      # GitHub occasionally can't find the upload for a moment ("No artifacts named github-pages").
+      # Try once, wait a minute, then try again before reporting a failure.
+      - id: first_try
+        uses: actions/deploy-pages@v5
+        continue-on-error: true
+      - name: Wait before trying again
+        if: steps.first_try.outcome == 'failure'
+        run: sleep 60
+      - id: second_try
+        if: steps.first_try.outcome == 'failure'
         uses: actions/deploy-pages@v5
