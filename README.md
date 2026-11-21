@@ -21,6 +21,8 @@ The site for [thistle.network](https://thistle.network): plain HTML, CSS and Jav
 | `site.css` | All the styles, with the light and dark colours at the top. |
 | `assets/` | The logos. |
 | `privacy.html` | The privacy notice. Update the date at the top whenever it changes. |
+| `sitemap.xml`, `robots.txt` | For search engines. Add any new page to the sitemap; its date fills itself in on each publish. |
+| `404.html` | The page shown for a broken link. |
 
 Edit a file on GitHub, commit to `main`, and the site updates in about a minute.
 
