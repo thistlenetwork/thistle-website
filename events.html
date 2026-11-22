@@ -113,6 +113,8 @@
       const off = zone === "GMT" ? "+00:00" : zone.replace("GMT", "").replace(/^([+-])(\d)$/, "$10$2:00").replace(/^([+-]\d{2})$/, "$1:00");
       return `${e.date}T${hm}:00${off}`;
     };
+    // end: "endTime" in events.json if known (e.g. "9pm"); otherwise just the day it's on
+    const toIsoEnd = (e) => (e.endTime ? toIsoStart({ date: e.date, time: e.endTime }) : e.date);
     const dated = upcoming.filter((e) => e.date);
     if (dated.length) {
       const ld = document.createElement("script");
@@ -125,10 +127,12 @@
         description: `${{ current: "For current apprentices only.", aspiring: "For aspiring apprentices.", all: "Open to current and aspiring apprentices." }[TN.audienceOf(e)]} ${e.blurb || ""}`.trim(),
         audience: { "@type": "Audience", audienceType: { current: "Current apprentices in Scotland", aspiring: "Aspiring apprentices in Scotland", all: "Current and aspiring apprentices in Scotland" }[TN.audienceOf(e)] },
         startDate: toIsoStart(e),
+        endDate: toIsoEnd(e),
         eventStatus: "https://schema.org/EventScheduled",
         eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
         location: { "@type": "Place", name: e.venue || e.place, address: { "@type": "PostalAddress", addressLocality: e.place, addressRegion: "Scotland", addressCountry: "GB" } },
         organizer: { "@type": "Organization", name: "The Thistle Network", url: "https://thistle.network/" },
+        performer: { "@type": "Organization", name: "The Thistle Network" },
         url: "https://thistle.network/events.html",
         image: "https://thistle.network/assets/og-image.png"
       })));
