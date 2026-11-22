@@ -11,7 +11,7 @@ const lastChanged = (files) => {
 
 let xml = readFileSync("sitemap.xml", "utf8");
 xml = xml.replace(/<url><loc>https:\/\/thistle\.network\/([^<]*)<\/loc><lastmod>[^<]*<\/lastmod><\/url>/g, (whole, path) => {
-  const page = path || "index.html";
+  const page = !path ? "index.html" : path.endsWith(".html") ? path : `${path}.html`;
   const files = [page];
   if (existsSync(page) && readFileSync(page, "utf8").includes("data-next-event")) files.push("events.json");
   const date = lastChanged(files);

@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Join · The Thistle Network</title>
 <meta name="description" content="Register to join The Thistle Network. Pick your path and go straight to the right sign-up form. Free to join.">
-<link rel="canonical" href="https://thistle.network/join.html">
+<link rel="canonical" href="https://thistle.network/join">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Thistle Network">
 <meta property="og:title" content="Join · The Thistle Network">
 <meta property="og:description" content="Register to join The Thistle Network. Pick your path and go straight to the right sign-up form. Free to join.">
-<meta property="og:url" content="https://thistle.network/join.html">
+<meta property="og:url" content="https://thistle.network/join">
 <meta property="og:image" content="https://thistle.network/assets/og-image.png">
 <meta property="og:image:alt" content="The Thistle Network: connecting aspiring and current apprentices across Scotland">
 <meta name="twitter:card" content="summary_large_image">
@@ -58,7 +58,7 @@
           <li><span class="dot">02</span><div><h3>Get approved</h3><p>A volunteer checks each registration to keep the community safe, relevant and apprentice-only. This may take a few days.</p></div></li>
           <li><span class="dot">03</span><div><h3>Join the community</h3><p>Approved members get an invite to the community. You can't join directly.</p></div></li>
         </ol>
-        <p style="color:var(--muted)">Joining is free. Questions first? <a href="about.html#faq">Read the FAQ</a>.</p>
+        <p style="color:var(--muted)">Joining is free. Questions first? <a href="about#faq">Read the FAQ</a>.</p>
       </div>
     </div>
   </section>
@@ -84,10 +84,10 @@
     const html = answers.stage === "current"
       ? `<span class="pill pill-current">Current apprentice</span><h3>Use the current apprentice form.</h3>
         <p class="lede">It's for anyone on a Modern or Graduate Apprenticeship in Scotland, aged 16 or over. Once you're approved, you'll get an invite to the community.</p>
-        <div class="hero-actions"><a class="btn btn-primary" href="${TN.FORMS.current}">Open the current apprentice form</a><a class="btn btn-ghost" href="current.html">See what's included</a></div>`
+        <div class="hero-actions"><a class="btn btn-primary" href="${TN.FORMS.current}">Open the current apprentice form</a><a class="btn btn-ghost" href="current">See what's included</a></div>`
       : `<span class="pill pill-aspiring">Aspiring apprentice</span><h3>Use the aspiring apprentice form.</h3>
         <p class="lede">Once you're approved, you'll join others going through applications, and you can ask the team your questions.</p>
-        <div class="hero-actions"><a class="btn btn-primary" href="${TN.FORMS.aspiring}">Open the aspiring apprentice form</a><a class="btn btn-ghost" href="aspiring.html">See what's included</a></div>`;
+        <div class="hero-actions"><a class="btn btn-primary" href="${TN.FORMS.aspiring}">Open the aspiring apprentice form</a><a class="btn btn-ghost" href="aspiring">See what's included</a></div>`;
     quiz.innerHTML = `<div class="quiz-result">${html}</div><button class="quiz-back" type="button" id="restart">Start again</button>`;
   };
   quiz.addEventListener("click", (e) => {

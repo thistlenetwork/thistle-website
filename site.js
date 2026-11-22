@@ -41,10 +41,10 @@
 
   const nav = [
     ["home", "./", "Home"],
-    ["aspiring", "aspiring.html", "Aspiring"],
-    ["current", "current.html", "Current"],
-    ["events", "events.html", "Events"],
-    ["about", "about.html", "About"]
+    ["aspiring", "aspiring", "Aspiring"],
+    ["current", "current", "Current"],
+    ["events", "events", "Events"],
+    ["about", "about", "About"]
   ];
 
   const logo = (cls) => `<img class="logo-l ${cls || ""}" src="assets/wordmark-light.png" alt="Thistle Network"><img class="logo-d ${cls || ""}" src="assets/wordmark-dark.png" alt="Thistle Network">`;
@@ -58,7 +58,7 @@
     <div class="header-tools">
       <button class="icon-btn" id="theme-btn" type="button" aria-label="Switch colour theme"></button>
       <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">${icon.menu}</button>
-      <a class="btn btn-primary" href="join.html"><span>Register<span class="hide-sm"> to join</span></span></a>
+      <a class="btn btn-primary" href="join"><span>Register<span class="hide-sm"> to join</span></span></a>
     </div></div>`;
   document.body.prepend(header);
   if (skipEl) document.body.prepend(skipEl); // first thing a keyboard user reaches
@@ -74,13 +74,13 @@
         <a href="https://www.tiktok.com/@thistlenetwork" aria-label="TikTok">${icon.tiktok}</a>
       </div></div>
     <div><h2>Network</h2><ul>
-      <li><a href="aspiring.html">Aspiring apprentices</a></li><li><a href="current.html">Current apprentices</a></li>
-      <li><a href="events.html">Events</a></li><li><a href="about.html">About the network</a></li></ul></div>
+      <li><a href="aspiring">Aspiring apprentices</a></li><li><a href="current">Current apprentices</a></li>
+      <li><a href="events">Events</a></li><li><a href="about">About the network</a></li></ul></div>
     <div><h2>Get involved</h2><ul>
-      <li><a href="join.html">Register to join</a></li><li><a href="about.html#employers">For employers</a></li>
-      <li><a href="about.html#contact">Contact us</a></li></ul></div>
+      <li><a href="join">Register to join</a></li><li><a href="about#employers">For employers</a></li>
+      <li><a href="about#contact">Contact us</a></li></ul></div>
     <div class="fine"><span>© ${new Date().getFullYear()} The Thistle Network. Made by apprentices, for apprentices, in Scotland.</span>
-      <nav aria-label="Policies"><ul class="fine-links"><li><a href="privacy.html">Privacy policy</a></li></ul></nav></div>
+      <nav aria-label="Policies"><ul class="fine-links"><li><a href="privacy">Privacy policy</a></li></ul></nav></div>
   </div>`;
   document.body.append(footer);
 
@@ -187,7 +187,7 @@
     loadEvents().then((allEvents) => {
       const events = forAudience(allEvents, who);
       const ev = nextEvent(events), t = eventTotals(events);
-      const more = `<div><a class="btn btn-purple" href="events.html">See all events ${icon.arrow}</a></div>`;
+      const more = `<div><a class="btn btn-purple" href="events">See all events ${icon.arrow}</a></div>`;
       if (ev) {
         nextBox.innerHTML = `<div class="stack"><span class="eyebrow">Next event in ${esc(ev.place)}</span><h2>${esc(ev.title)}</h2><p class="lede">${fmtLong(ev.date)}. ${esc(ev.blurb)}</p>${facts(ev)}${more}</div><div class="countdown" aria-label="Time until ${esc(ev.title)}"></div>`;
         startCountdown(nextBox.querySelector(".countdown"), ev);
@@ -198,7 +198,7 @@
       const hearFirst = who === "aspiring"
         ? `Follow us on social media to hear first, or join the community.`
         : `Follow us on social media to hear first, or join the community.`;
-      const aspiringBtn = who === "aspiring" ? `<div class="hero-actions"><a class="btn btn-primary" href="${FORMS.aspiring}">Register as aspiring</a><a class="btn btn-ghost" href="events.html">See all events</a></div>` : more;
+      const aspiringBtn = who === "aspiring" ? `<div class="hero-actions"><a class="btn btn-primary" href="${FORMS.aspiring}">Register as aspiring</a><a class="btn btn-ghost" href="events">See all events</a></div>` : more;
       nextBox.innerHTML = tbc
         ? `<div class="stack"><span class="eyebrow">Next up in ${esc(tbc.place)}, date coming soon</span><h2>${esc(tbc.title)}</h2><p class="lede">${esc(tbc.blurb)}${lastLine}</p>${facts(tbc)}${more}</div>`
         : `<div class="stack"><span class="eyebrow">Next event</span><h2>New dates coming soon</h2><p class="lede">${hearFirst}${lastLine}</p>${aspiringBtn}</div>`;
