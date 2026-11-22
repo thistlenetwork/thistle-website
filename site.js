@@ -196,8 +196,8 @@
       const tbc = events.find((e) => !e.date);
       const lastLine = t.last ? ` Last time out, ${esc(t.last.attended)} came to ${esc(t.last.title)}.` : "";
       const hearFirst = who === "aspiring"
-        ? `Follow us on socials to hear first, or join the community.`
-        : `Follow us on socials to hear first, or join the community.`;
+        ? `Follow us on social media to hear first, or join the community.`
+        : `Follow us on social media to hear first, or join the community.`;
       const aspiringBtn = who === "aspiring" ? `<div class="hero-actions"><a class="btn btn-primary" href="${FORMS.aspiring}">Register as aspiring</a><a class="btn btn-ghost" href="events.html">See all events</a></div>` : more;
       nextBox.innerHTML = tbc
         ? `<div class="stack"><span class="eyebrow">Next up in ${esc(tbc.place)}, date coming soon</span><h2>${esc(tbc.title)}</h2><p class="lede">${esc(tbc.blurb)}${lastLine}</p>${facts(tbc)}${more}</div>`
