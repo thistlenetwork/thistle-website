@@ -253,6 +253,12 @@ p { margin: 0; }
 .copy-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .copy-row code { font: 500 1.1rem var(--f-mono); background: var(--purple-soft); color: var(--purple-text); padding: 10px 14px; border-radius: 10px; user-select: all; }
 
+/* proud to support: logo row. Tiles stay white in dark mode because the badges are made for light backgrounds. */
+.supports-head h2 { font-size: var(--s3); }
+.supports { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 16px; }
+.supports a { display: block; background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 24px; }
+.supports img { display: block; width: clamp(180px, 50vw, 240px); height: auto; }
+
 /* footer */
 .site-footer { border-top: 1px solid var(--line); padding-block: 56px 40px; margin-top: 0; }
 .site-footer .wrap { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
