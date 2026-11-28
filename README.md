@@ -16,7 +16,7 @@ The site for [thistle.network](https://thistle.network): plain HTML, CSS and Jav
 | File | What it holds |
 | --- | --- |
 | `events.json` | Every event. Leave `date` as `null` until it's fixed, and add `attended` (how many came) afterwards. |
-| `index.html`, `aspiring.html`, `current.html`, `events.html`, `about.html`, `join.html` | The words on each page. |
+| `index.html`, `aspiring.html`, `current.html`, `events.html`, `about.html`, `join.html`, `work-with-us.html` | The words on each page. |
 | `site.js` | The menu and footer shared by every page, and the code that fills in the numbers and events. |
 | `site.css` | All the styles, with the light and dark colours at the top. |
 | `assets/` | The logos. |
